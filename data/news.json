@@ -1,26 +1,17 @@
 {
   "query": "부캉이",
-  "feed": "manual",
-  "updated": "2026-11-23T01:40:00.000Z",
-  "checked": "2026-11-23T01:40:00.000Z",
+  "feed": "https://news.google.com/rss/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2liX3QtV0VoRUMteGVJRHpCb1NpZ0FQAQ?hl=ko&gl=KR&ceid=KR:ko",
+  "updated": "2026-11-23T03:10:43.297Z",
+  "checked": "2026-11-23T03:10:43.297Z",
   "items": [
     {
-      "source": "파이낸셜뉴스",
-      "mark": "파",
-      "title": "부산시, '부캉이'로 도시브랜드 대상...시민 참여형 브랜딩 효과",
-      "date": "2026. 11. 20.",
-      "published": "2026-11-20T08:09:00.000Z",
-      "snippet": "부산시가 상어 캐릭터 '부캉이'를 활용한 창의적인 도시브랜드 홍보 전략으로 '제4회 대한민국 공공브랜드대상' 도시브랜드 부문 대상을 수상했다고 20일 밝혔다.",
-      "url": "https://www.fnnews.com/news/202611201653456267"
-    },
-    {
-      "source": "글로벌경제신문",
-      "mark": "글",
-      "title": "부산시, '부캉이' 대한민국 공공브랜드대상 도시브랜드 부문 대상 수상",
-      "date": "2026. 11. 21.",
-      "published": "2026-11-21T00:00:00.000Z",
-      "snippet": "지난 9월 부산시 동구 북항 친수공원에 출몰한 상어 ‘부캉이’가 대한민국 도시브랜드 대상을 거머쥐며 시민 참여형 도시마케팅의 새로운 성공 모델로 떠올랐다.",
-      "url": "https://www.getnews.co.kr/news/articleView.html?idxno=887989"
+      "source": "news.google.com",
+      "mark": "N",
+      "title": "사용할 수 없는 피드입니다.",
+      "date": "",
+      "published": null,
+      "snippet": "",
+      "url": "https://news.google.com/?fr_unfepa=1&oc=5"
     }
   ]
 }
