@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSAERI</title>
+<meta name="description" content="새리(CSAERI) — 해양동물시민과학연구프로젝트 소개. The Shark Lab, 강원대학교 수의과대학 수생생물의학실">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<style>
+/* Layout: 메인과 같은 검정→#00264B 바탕 위, 한 장의 글래스 원고지에 3개 장(章)을 세로로 */
+:root{
+  color-scheme: dark;
+  --night:#000000;
+  --abyss:#00264b;
+  --ink:#e8f0f4;
+  --ink-soft:rgba(232,240,244,.62);
+  --hl:#6fabc2;           /* 강조 글자 (메인 '새리' 강조색) */
+  --link:#438cb1;         /* 링크 (메인 Q&A 색) */
+  --pill-a:rgba(76,131,149,.9);
+  --pill-b:rgba(55,96,103,.9);
+  --line:rgba(255,255,255,.14);
+  --font:"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; background:var(--night)}
+body{
+  margin:0; min-height:100vh; color:var(--ink); font-family:var(--font); font-weight:300;
+  background:linear-gradient(to bottom, var(--night) 0%, #00101f 30%, var(--abyss) 100%);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden; word-break:keep-all;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(40% 30% at 15% 20%, rgba(40,120,190,.16), transparent 70%),
+    radial-gradient(45% 30% at 85% 70%, rgba(31,111,170,.18), transparent 70%);
+}
+img{max-width:100%; height:auto; display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid #fff; outline-offset:3px; border-radius:6px}
+
+.wrap{
+  max-width:880px; margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* 상단 */
+.topbar{display:flex; justify-content:center; padding-block:22px 0}
+.topbar a{display:block; width:220px; transition:opacity .3s}
+.topbar a:hover{opacity:.8}
+
+.masthead{display:flex; flex-direction:column; align-items:center; text-align:center; padding-block:56px 36px; gap:22px}
+.masthead .art{width:min(78%, 380px)}
+.pill{
+  display:inline-flex; align-items:center; justify-content:center; margin:0;
+  height:34px; padding:0 22px; border-radius:999px; color:#fff;
+  background:linear-gradient(180deg, var(--pill-a), var(--pill-b));
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 10px 26px -12px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.4);
+  font-size:15px; font-weight:400; letter-spacing:-.02em;
+}
+.toc{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:6px 0 0; padding:0; list-style:none}
+.toc a{
+  display:inline-block; padding:6px 14px; border-radius:999px; text-decoration:none;
+  font-size:13px; font-weight:400; color:var(--ink);
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.35);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  transition:background-color .3s;
+}
+.toc a:hover{background:rgba(255,255,255,.14)}
+
+/* 원고 */
+.paper{
+  border-radius:24px; padding:clamp(28px, 5vw, 56px) clamp(20px, 5.5vw, 64px);
+  background:linear-gradient(180deg, rgba(255,255,255,.16) 0, rgba(255,255,255,.03) 10%, rgba(255,255,255,0) 22%), linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.42);
+  -webkit-backdrop-filter:blur(10px) saturate(135%); backdrop-filter:blur(10px) saturate(135%);
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.8), inset 0 1.5px 0 rgba(255,255,255,.75);
+}
+section + section{margin-top:56px; padding-top:48px; border-top:1px solid var(--line)}
+section{scroll-margin-top:24px}
+h2{
+  display:flex; align-items:baseline; gap:12px; margin:0 0 22px;
+  font-size:20px; font-weight:700; letter-spacing:-.03em; color:#fff; text-wrap:balance;
+}
+h2 .no{font-size:12px; font-weight:500; letter-spacing:.12em; color:var(--hl)}
+p{margin:0 0 1.2em; font-size:15.5px; line-height:1.95; letter-spacing:-.015em; text-wrap:pretty}
+p:last-child{margin-bottom:0}
+strong{font-weight:500; color:#fff}
+em.sp{font-style:italic}
+.hl{color:var(--hl); font-weight:500}
+.callout{
+  margin:1.6em 0; padding:18px 22px; border-radius:14px;
+  background:rgba(111,171,194,.08); border:1px solid rgba(111,171,194,.35);
+  font-size:16.5px; font-weight:500; line-height:1.8; color:#fff;
+}
+sup a{
+  margin-left:1px; font-size:11px; font-weight:500; color:var(--link); text-decoration:none;
+}
+sup a:hover{text-decoration:underline}
+
+.refs{margin-top:48px; padding-top:28px; border-top:1px solid var(--line)}
+.refs h3{margin:0 0 14px; font-size:13px; font-weight:500; letter-spacing:.12em; color:var(--ink-soft)}
+.refs ol{margin:0; padding-left:1.4em; display:grid; gap:12px}
+.refs li{font-size:13px; line-height:1.7; color:var(--ink-soft); word-break:normal; overflow-wrap:anywhere; scroll-margin-top:24px}
+.refs li:target{color:var(--ink)}
+.refs a{color:var(--link)}
+.note{margin-top:28px; font-size:13px; color:var(--ink-soft)}
+
+/* 하단 */
+.back{display:flex; justify-content:center; padding-block:40px 0}
+.btn{
+  display:inline-flex; align-items:center; gap:.5em; height:34px; padding:0 18px; border-radius:999px;
+  text-decoration:none; font-size:13px; font-weight:400; color:#fff;
+  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 40%), rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.95);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  box-shadow:0 10px 28px -14px rgba(0,0,0,.6), inset 0 1.5px 0 #fff;
+  transition:background-color .3s, transform .3s;
+}
+.btn:hover{background-color:rgba(255,255,255,.14); transform:translateY(-2px)}
+.copyright{
+  margin:48px 0 0; padding-block:18px 28px; border-top:1px solid var(--line);
+  font-size:12px; font-weight:400; color:rgba(232,240,244,.6);
+}
+
+@media (max-width:600px){
+  .topbar a{width:180px}
+  .masthead{padding-block:40px 28px}
+  .paper{border-radius:20px}
+  h2{font-size:18px}
+  p{font-size:14.5px; line-height:1.9}
+  .callout{font-size:15px; padding:16px 18px}
+  section + section{margin-top:44px; padding-top:38px}
+  .copyright{text-align:center}
+}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <a href="index.html" aria-label="새리 홈으로"><img src="assets/img/logo1-white.png" alt="The Shark Lab — Laboratory of Aquatic Biomedicine, Kangwon National University" width="1200" height="330"></a>
+  </header>
+
+  <div class="masthead">
+    <img class="art" src="assets/img/type-title.png" alt="새리 — Citizen Science for Aquatic Animal Evaluation and Research Initiative" width="1133" height="539">
+    <h1 class="pill">새리(CSAERI)란?</h1>
+    <ul class="toc" aria-label="목차">
+      <li><a href="#intro">소개</a></li>
+      <li><a href="#citizen-science">시민과학이란?</a></li>
+      <li><a href="#saeri-and-cs">새리, 그리고 시민과학</a></li>
+    </ul>
+  </div>
+
+  <main class="paper">
+    <section id="intro" aria-labelledby="h-intro">
+      <h2 id="h-intro"><span class="no">01</span>소개</h2>
+      <p>2026년 9월 18일, 부산광역시 동구 북항친수공원 내 인공수로에서 대형 상어가 발견되었다는 최초 보고가 접수되었습니다. <span class="hl">부캉이</span>라는 애칭을 가진 상어의 종명은 흑상어(<em class="sp">Carcharhinus obscurus</em>)로 일반적으로 수온 19~28°C, 수심 10-100m의 해역을 선호하는 종이었습니다. 이러한 부캉이가 수심 3-5m에 불과한 얕은 인공수로에서 한 달 이상 체류했다는 점에서 이례적인 사례로 주목받게 되었고, 이러한 장기간 체류가 개체의 건강 상태와 생존 여부에 어떤 영향을 미치는 지에 대한 관심과 우려도 커졌습니다.</p>
+      <p>최초 발견으로부터 35일이 지난 2026년 10월 23일. 세 차례에 걸친 외해 유도 작업 끝에 인공수로를 벗어난 후 부캉이는 10월 26일 부산항국제여객터미널 인근 해역에서 마지막으로 목격되었으며, 외해로 이동한 것으로 추정 중에 있습니다.</p>
+      <p>2004년 미국 메사추세츠주의 얕은 석호에 갇혔다가 2주 후 외해로 유도된 백상아리, 2020년 아랍에미레트 아부다비의 인공 항구에서 출구 유도 실패로 직접적인 구조가 필요했던 고래상어 등 전세계적으로 넓은 바다에서 살던 대형 해양동물이 인공 구조물에 잘못 유입되어 장기간 체류하는 사례가 꾸준히 보고되고 있습니다. 앞선 사례들 모두 바다와 물리적으로 연결된 곳임에도 해양동물이 쉽게 빠져나오지 못하여 인간의 개입 후에야 외해로 돌아간 경우에 해당하기에, <span class="hl">부캉이</span> 건과도 상당히 비슷한 전례라고 할 수 있습니다.</p>
+      <p>이처럼 개체를 기존 서식지로 유도하거나 적절한 서식 환경으로 이동시키기 위한 대응은 이루어지고 있으나, 정작 개체의 건강 상태를 객관적이고 정량적으로 평가하고 개입이 필요한 시점을 판단하는 데에는 조사 방법과 기술적 한계가 존재합니다. 직접적인 진단은 해당 개체를 자극할 수밖에 없어 예측하지 못한 공격성으로 인해 인명피해를 야기할 수 있기에 안전 상의 이유로 어려운 상황인 데에다, 야생 상태의 개체를 포획하는 자체도 동물에게 상당한 스트레스를 유발하기에 심각할 경우 폐사로 이어질 가능성이 존재합니다. 따라서 촉진이나 채혈을 비롯한 일반적인 수의학적 검사 및 정밀 진단 기법을 적용하는 데에는 현실적인 제약이 따릅니다. 또한 외형적인 상처의 유무를 확인하는 수준 이상의 병변의 진행 속도와 악화 여부, 자연적인 회복 및 치유 과정에 진입했는지 등을 지속적으로 평가할 수 있는 비침습적 진단 체계 역시 충분히 확립되어 있지 않습니다.</p>
+      <p class="callout"><span class="hl">새리</span>는 이러한 공백을 해소하고, 대형 해양동물의 건강 상태를 평가하기 위한 기초자료 확립과 프로토콜을 마련하고자 하는 연구 프로젝트입니다.</p>
+      <p>본 프로젝트는 시민 과학(Citizen Science), 연구진의 수의학적 전문성, AI 기반 영상 분석 기술을 접목하여 개체의 상태와 시간에 따른 변화를 추적하고, 반복적인 관찰을 바탕으로 건강 상태를 평가할 수 있는 연구 기반을 마련하고자 합니다.</p>
+      <p>궁극적으로 부캉이와도 같은 사례가 다시 발생했을 때 개체의 건강 상태를 객관적으로 파악하고, 관찰 결과를 바탕으로 적절한 대응 여부와 시점을 판단할 수 있는 수의학적 진단의 근거가 될 초석을 다지고자 합니다.</p>
+    </section>
+
+    <section id="citizen-science" aria-labelledby="h-cs">
+      <h2 id="h-cs"><span class="no">02</span>시민과학이란?</h2>
+      <p>시민과학(Citizen Science)은 <strong>전문 연구자가 아닌 일반 시민이 자발적으로 연구에 참여하여 현상을 관찰 및 기록함으로써 지식의 생산에 기여하는 협력적 연구 방식</strong>입니다. 이는 시민들이 일상에서 관찰한 자료를 수집한 후 축적된 데이터를 연구자의 분석 및 해석을 통해 과학적 성과로 발전시킨다는 의의를 가집니다. 시민과학은 전문 연구자만으로 확보하기 어려운 규모의 관측 자료를 활용할 수 있다는 장점을 지녀 최근 생태학, 천문학, 의학 등 다양한 분야에서 활용되고 있습니다.</p>
+      <p>시민과학이 환경 및 생태계 보전에 기여한 사례는 다수 존재해, 국내외에서 쉽게 찾아볼 수 있는 편입니다. 그 중 미국 국립오듀본협회(National Audubon Society)의 <span class="hl">크리스마스 조류 조사(Christmas Bird Count)</span>는 1900년 시작된 조류 관찰 프로그램으로, 120년이 넘는 기간 동안 자원봉사자들의 참여를 통해 매년 조사가 이어지고 있습니다. 이 세계에서 가장 오래된 시민과학 프로젝트를 통해 장기간 축적된 관측 자료는 조류의 개체군 및 분포 변화를 파악하는 데 활용되고 있습니다.</p>
+      <p>국내에서는 서울환경운동연합의 <span class="hl">철새보호구역 시민조사단</span>이 대표적으로 조사단은 2020년부터 매년 12월부터 이듬해 3월까지 중랑천과 안양천 일대에서 겨울 철새의 종과 개체수를 기록해오고 있으며, 조사 결과는 보고서로 정리되어 철새 서식지 보전 정책의 기초 자료로 활용됩니다. 이 활동은 철새보호구역으로부터의 한강버스 선착장의 이전과 철새 도래 시기 중 보호구역 정비 및 호안블록 공사 중단 등 관련 보전 활동에도 기여한 바 있습니다. 이는 시민들의 지속적인 관찰과 기록이 실제 환경 보전 정책과 활동에 반영된 사례입니다.</p>
+      <p>해양과학 분야 역시도 사진을 활용한 시민과학 연구가 활발하게 진행되고 있습니다. <span class="hl">갈라파고스 고래상어 프로젝트(Galápagos Whale Shark Project)</span>는 다이버들이 촬영한 고래상어 사진을 목격 날짜, 장소, 좌표 등의 정보와 함께 수집하는 조사를 진행하고 있습니다. 개체마다 서로 다른 몸의 반점 무늬로 식별된 각 개체에 대해 축적된 기록은 고래상어의 개체군 동향과 이동 경로, 분포 변화 연구에 활용됩니다.</p>
+      <p>이처럼 개인이 촬영한 사진이 단순한 목격 기록을 넘어 특정 개체의 출현을 확인하고 장기적인 생태 변화를 추적하는 과학적 자료가 될 수 있다는 점에서, 시민과학에서의 <span class="hl">관심</span>이란 무엇보다도 큰 의의를 가지게 됩니다.</p>
+    </section>
+
+    <section id="saeri-and-cs" aria-labelledby="h-scs">
+      <h2 id="h-scs"><span class="no">03</span>새리, 그리고 시민과학</h2>
+      <p>동물의 체형과 신체 상태는 영양과 건강 수준만이 아닌 서식 환경에 대한 적응도를 반영하는 생물학적 지표입니다. 체형은 체온 유지와 열 손실, 단식에 대한 내성, 이동 및 운동에 필요한 에너지 소비 등 다양한 생리적 기능과 밀접하게 연관되어 있어, 체형 측정과 시간에 따른 변화 분석은 야생동물의 건강 상태 및 환경 적응도를 평가하는 데에 있어 중요합니다. 대형 해양동물에서는 사진측량법(Photogrammetry)을 활용한 체형 및 체중 추정이 비침습적 모니터링 기법으로 활용되고 있으며, 특히 고래류를 중심으로 관련 연구가 축적되어 있습니다.<sup><a href="#ref1" id="cite1" aria-label="참고문헌 1">1</a></sup><sup><a href="#ref2" id="cite2" aria-label="참고문헌 2">2</a></sup> 반면 상어를 비롯한 연골어류에서는 사진 기반 형태계측을 수의학적 건강 평가에 적용하기 위한 연구와 정량적 진단 기준이 아직 부족한 실정입니다.<sup><a href="#ref3" id="cite3" aria-label="참고문헌 3">3</a></sup></p>
+      <p><span class="hl">새리</span>는 선행 연구의 한계를 보완하기 위해서 시민과학과의 융합을 통해 축적된 자료를 통합적으로 관리하고 동일 개체에 대한 연속 추적 관찰(Serial Follow-up)이 가능한 데이터베이스를 구축하고자 합니다. 이를 바탕으로 사진 기반 건강 평가 지표의 유효성을 검토하고, 특정 장소에 장기간 체류하는 해양동물이 발견되었을 때 개체의 상태를 평가하고 적절한 개입 여부와 시점을 판단할 수 있는 수의학적 평가 프로토콜을 마련하는 것이 목표입니다.</p>
+      <p>현재 우리가 마주한 사례는 <span class="hl">부캉이</span>지만, 앞으로 어떤 종이 어떤 환경에 출현하고 얼마나 오래 체류할지는 예측하기 어렵습니다. 따라서 향후 유사한 환경에 출현하는 다양한 수생생물에도 적용할 수 있는 장기 모니터링 체계가 필요한 실정입니다.</p>
+      <p>한 사람의 관찰은 개별적인 기록에 불과할 수 있지만, 다양한 관찰이 지속적으로 축적된다면 개체의 건강 상태 뿐만 아니라 생태적 변화를 이해하는 연구 자료로도 활용할 수 있습니다. <span class="hl">새리</span>는 시민과학과 수의학적 전문성, AI 기반 영상 분석을 연계하여 시민과학의 연구적 활용 범위를 확장하고, 나아가 야생 수생생물에 대한 인간의 적절한 개입과 보호를 위한 과학적 근거를 마련하고자 합니다.</p>
+    </section>
+
+    <div class="refs" aria-labelledby="h-refs">
+      <h3 id="h-refs">REFERENCES</h3>
+      <ol>
+        <li id="ref1">de Oliveira, L. L., Andriolo, A., Cremer, M. J., &amp; Zerbini, A. N. (2023). Aerial photogrammetry techniques using drones to estimate morphometric measurements and body condition in South American small cetaceans. <em>Marine Mammal Science</em>, 39(3), 811–829.</li>
+        <li id="ref2">Napoli C, Hirtle N, Stepanuk J, Christiansen F, Heywood EI, Grove TJ, Stoller A, Dodds F, Glarou M, Rasmussen MH, Lonati GL, Davies KTA, Videsen S, Simon MJ, Boye TK, Zoidis A, Todd SK and Thorne LH (2024) Drone-based photogrammetry reveals differences in humpback whale body condition and mass across North Atlantic foraging grounds. <em>Front. Mar. Sci.</em> 11:1336455.</li>
+        <li id="ref3">Whitehead, D.A., Ayres, K.A., Gayford, J.H. et al. Aerial photogrammetry of whale sharks (<em>Rhincodon typus</em>) in the Bay of La Paz, using an unoccupied aerial vehicle. <em>Mar Biol</em> 169, 94 (2022).</li>
+      </ol>
+      <p class="note">* 본 프로젝트를 통해 도출된 연구 성과(학술지 논문, 발표 자료 등)는 추후 웹페이지 내 게시 예정입니다.</p>
+    </div>
+  </main>
+
+  <div class="back"><a class="btn" href="index.html">← 메인으로</a></div>
+
+  <p class="copyright">© 2026 수생생물의학실, 강원대학교 수의과대학. All rights reserved.</p>
+</div>
+</body>
+</html>

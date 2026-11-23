@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSAERI</title>
+<meta name="description" content="Aquatic CSI — Aquatic Citizen Science Investigation. The Shark Lab, 강원대학교 수의과대학 수생생물의학실">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500&display=swap">
+<style>
+/* Layout: PSD(4000px 캔버스) 비율을 그대로 옮긴 2단 구성 — 사진 히어로 + 결이 이어지는 질감 배경 위 글래스 패널 */
+:root{
+  color-scheme: light;
+  --ink:#16231e;          /* 본문 글자 */
+  --ink-soft:#3e4a45;     /* 보조 글자 */
+  --sea:#2a70b0;          /* 포인트 블루 */
+  --sea-deep:#00264b;     /* 짙은 블루 */
+  --white:#ffffff;
+  --night:#000000;        /* 하단 배경 시작 */
+  --abyss:#00264b;        /* 하단 배경 끝 */
+  --ink-dark:#0d1b26;     /* 흰 버튼 위 글자 */
+  --glass-line:rgba(255,255,255,.95);            /* 불투명 흰 테두리 */
+  --glass-sheen:linear-gradient(180deg, rgba(255,255,255,.42) 0, rgba(255,255,255,.08) 14%, rgba(255,255,255,0) 30%);
+  --glass-shadow:0 18px 50px -20px rgba(20,35,30,.32), inset 0 1.5px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.18);
+  --btn-white:rgba(255,255,255,.42);
+  --btn-clear:rgba(255,255,255,.04);
+  --serif:"Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
+  --font:"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+
+  /* 1u = PSD 40px. 1440px 이상에서 고정 */
+  --u:min(1vw, 14.4px);
+  /* 히어로 높이와 배경 공용 폭: 두 배경이 같은 폭·같은 x 위치를 써서 이음매 없이 이어짐 */
+  --hero-ratio:0.62525;            /* 2501 / 4000 */
+  --hero-h:max(calc(100vw * var(--hero-ratio)), 600px);
+  --bg-w:max(100vw, calc(var(--hero-h) / var(--hero-ratio)));
+  --bg-x:46%;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--abyss); color:var(--ink);
+  font-family:var(--font); font-weight:400; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%; height:auto; display:block}
+[hidden]{display:none!important}
+a{color:inherit; text-decoration:none}
+:focus-visible{outline:2px solid var(--white); outline-offset:3px; border-radius:999px}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* ───────── 공통: Glass Morphism ───────── */
+.glass{
+  background:var(--glass-sheen), linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.03));
+  border:1px solid var(--glass-line);
+  -webkit-backdrop-filter:blur(10px) saturate(135%);
+  backdrop-filter:blur(10px) saturate(135%);
+  box-shadow:var(--glass-shadow);
+  border-radius:calc(var(--u) * 1.6);
+}
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--font); font-weight:400; letter-spacing:-.02em; white-space:nowrap;
+  border-radius:999px; cursor:pointer; overflow:hidden; isolation:isolate;
+  -webkit-backdrop-filter:blur(8px) saturate(150%); backdrop-filter:blur(8px) saturate(150%);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, background-color .35s;
+}
+.btn::after{ /* 지나가는 빛 */
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+  transform:translateX(-120%); transition:transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover::after{transform:translateX(120%)}
+.btn:active{transform:translateY(0) scale(.98)}
+/* 흰 버튼 → 흰색 60% 글래스 */
+.btn--white{
+  background:var(--glass-sheen), var(--btn-white); color:var(--ink-dark);
+  border:1px solid #fff;
+  box-shadow:0 8px 22px -12px rgba(20,35,30,.35), inset 0 1.5px 0 #fff;
+}
+.btn--white:hover{background:var(--glass-sheen), rgba(255,255,255,.58)}
+/* 검은 버튼 → 투명 글래스 */
+.btn--clear{
+  background:var(--glass-sheen), var(--btn-clear); color:var(--white);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 10px 28px -14px rgba(0,0,0,.45), inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(255,255,255,.2);
+}
+.btn--clear:hover{background:var(--glass-sheen), rgba(255,255,255,.14)}
+
+/* ───────── 1. 배경 ───────── */
+.hero{
+  position:relative; min-height:var(--hero-h);
+  background-color:#2f7a66;
+  background-image:url(assets/img/bg-hero-2560.jpg);
+  background-image:image-set(url(assets/img/bg-hero-2560.webp) type("image/webp"), url(assets/img/bg-hero-2560.jpg) type("image/jpeg"));
+  background-size:var(--bg-w) auto; background-position:var(--bg-x) bottom; background-repeat:no-repeat;
+  color:var(--white);
+}
+.hero::before{ /* 글자 가독성을 위한 아주 옅은 비네트 */
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(120% 70% at 85% 30%, rgba(8,40,32,.28), transparent 60%),
+    linear-gradient(to bottom, rgba(5,30,24,.22), transparent 22%);
+}
+.hero::after{ /* 사진 아래 끝을 검정으로 녹임 */
+  content:""; position:absolute; inset:auto 0 0; height:18%; pointer-events:none;
+  background:linear-gradient(to bottom, rgba(0,0,0,0), var(--night));
+}
+.hero .frame{z-index:1}
+/* 하단: 검정 → #00264B 그라데이션 + 글래스가 비칠 은은한 빛 */
+.lower{
+  position:relative; isolation:isolate;
+  background:linear-gradient(to bottom, var(--night) 0%, #00101f 35%, var(--abyss) 100%);
+  /* 하단 영역 글자 토큰 (어두운 배경용) */
+  --ink:#e8f0f4;
+  --ink-soft:rgba(232,240,244,.62);
+  --sea:#3c82cc;
+  --sea-deep:#a8d9f7;
+  --glass-line:rgba(255,255,255,.42);
+  --glass-sheen:linear-gradient(180deg, rgba(255,255,255,.16) 0, rgba(255,255,255,.03) 14%, rgba(255,255,255,0) 30%);
+  --glass-shadow:0 24px 60px -24px rgba(0,0,0,.8), inset 0 1.5px 0 rgba(255,255,255,.75), inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.lower::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(42% 22% at 22% 30%, rgba(40,120,190,.20), transparent 70%),
+    radial-gradient(40% 24% at 80% 52%, rgba(31,111,170,.24), transparent 70%),
+    radial-gradient(60% 20% at 50% 96%, rgba(70,150,210,.16), transparent 70%);
+}
+.lower .glass{background:var(--glass-sheen), linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.025))}
+.lower{color:var(--ink)}
+.lower .btn--white{background:var(--glass-sheen), rgba(255,255,255,.62); border-color:rgba(255,255,255,.95); box-shadow:0 10px 26px -12px rgba(0,0,0,.7), inset 0 1.5px 0 #fff}
+.lower .btn--white:hover{background:var(--glass-sheen), rgba(255,255,255,.78)}
+@media (max-width:1280px){
+  .hero{
+    background-image:url(assets/img/bg-hero-1280.jpg);
+    background-image:image-set(url(assets/img/bg-hero-1280.webp) type("image/webp"), url(assets/img/bg-hero-1280.jpg) type("image/jpeg"));
+  }
+}
+.frame{
+  position:relative; width:100%; max-width:1440px; margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ───────── 1-2 최상단 로고 ───────── */
+.topbar{display:flex; justify-content:center; padding-top:calc(var(--u) * 1.3)}
+.toplogo{width:calc(var(--u) * 19.8); min-width:180px; transition:opacity .3s}
+.toplogo:hover{opacity:.82}
+
+/* ───────── 2. 히어로 ───────── */
+.hero .frame{min-height:var(--hero-h); padding-block:0}
+.hosted{ /* 0-1 고정 타이포 (PSD 래스터 그대로) */
+  position:absolute; left:calc(var(--u) * 2.15); top:calc(var(--u) * 16.2);
+  width:calc(var(--u) * 2.625); min-width:20px;
+}
+.hero-copy{
+  position:absolute; right:calc(var(--u) * 5.075); top:calc(var(--u) * 18.075);
+  display:flex; flex-direction:column; align-items:flex-end;
+}
+.title-art{width:calc(var(--u) * 30)} /* 0-1 고정 타이포 (PSD 래스터 그대로) */
+.hero-lede{
+  margin:calc(var(--u) * 2.2) 0 0; text-align:right;
+  font-size:max(calc(var(--u) * 1.25), 13px); font-weight:300; line-height:1.65; letter-spacing:-.02em;
+  color:rgba(255,255,255,.92); text-shadow:0 1px 3px rgba(0,20,15,.45), 0 2px 16px rgba(0,20,15,.45);
+}
+.hero-lede span{display:block}
+.hero-lede strong{font-weight:700; color:var(--white)}
+.btn--submit{
+  margin-top:calc(var(--u) * 2.025); margin-right:calc(var(--u) * 2.05);
+  width:calc(var(--u) * 11.41); height:calc(var(--u) * 2.31); min-height:31px; min-width:105px;
+  font-size:max(calc(var(--u) * 1.12), 11px); font-weight:300; letter-spacing:.02em;
+}
+.btn--submit .arrow{display:inline-block; margin-left:.5em; transition:transform .35s}
+.btn--submit:hover .arrow{transform:translateX(4px)}
+
+/* ───────── 3. 통계 ───────── */
+.lower .frame{padding-block:calc(var(--u) * 2.5) calc(var(--u) * 3.7)}
+.stats{
+  width:73.9%; margin:0 auto; min-height:calc(var(--u) * 16.6);
+  display:grid; place-items:center; text-align:center;
+  padding:calc(var(--u) * 3) calc(var(--u) * 2);
+}
+.stats p{margin:0; font-family:var(--serif); font-size:max(calc(var(--u) * 1.75), 13px); font-weight:300; line-height:1.55; letter-spacing:-.03em; color:var(--ink)}
+.count{
+  display:inline-flex; align-items:baseline; justify-content:center; gap:.18em;
+  margin:0 .15em; font-weight:500; color:#4c8395;
+  font-variant-numeric:tabular-nums;
+}
+.count b{font-weight:500}
+.count .paren{font-weight:300; color:var(--ink-soft)}
+.stats .today .count{color:#376067}
+
+/* ───────── 4·5. 카드 ───────── */
+.cards{
+  display:grid; grid-template-columns:1fr 1fr; gap:calc(var(--u) * 1.3);
+  margin-top:calc(var(--u) * 5.675);
+}
+.card{display:flex; flex-direction:column; align-items:center; min-height:calc(var(--u) * 49.85); padding:calc(var(--u) * 2.1) calc(var(--u) * 2.4) calc(var(--u) * 2.9); min-width:0}
+.pill{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:calc(var(--u) * 14.91); max-width:100%; height:calc(var(--u) * 3.115); min-height:31px;
+  border-radius:999px; color:var(--white);
+  background:linear-gradient(180deg, rgba(76,131,149,.9), rgba(55,96,103,.9));
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 10px 26px -12px rgba(0,38,75,.8), inset 0 1px 0 rgba(255,255,255,.4);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  font-size:max(calc(var(--u) * 1.274), 10px); font-weight:400; letter-spacing:-.02em; margin:0;
+}
+.btn--more{width:calc(var(--u) * 10.36); height:calc(var(--u) * 2.17); min-height:30px; min-width:98px; font-size:max(calc(var(--u) * 1.12), 11px)}
+
+/* 4. 새리(CSAERI)란? */
+.about-text{
+  flex:1; width:100%; max-width:40em; margin:calc(var(--u) * 2.6) auto calc(var(--u) * 2); word-break:keep-all;
+  text-align:center; font-size:max(calc(var(--u) * 1.06), 13px); font-weight:300; line-height:1.9; letter-spacing:-.02em; color:var(--ink);
+}
+.about-text p{margin:0 0 1.1em; text-wrap:pretty}
+.about-text strong{font-weight:500; color:#6fabc2}
+.about-text .lead{display:inline-block; margin-bottom:.15em; font-size:1.15em; font-weight:700; letter-spacing:-.03em}
+.about-text .hl{font-style:normal; font-weight:500; color:#6fabc2}
+.about-text .acronym{font-size:.9em; letter-spacing:0; color:var(--ink-soft)}
+.about-text .acronym b{font-weight:700; color:#6fabc2}
+
+/* 5. 관련 정보 */
+.qa{display:grid; grid-template-columns:calc(var(--u) * 12.4) 1fr; align-items:center; gap:calc(var(--u) * 2); width:100%; margin-top:calc(var(--u) * 1.3); padding-inline:calc(var(--u) * 1.6)}
+.qa img{width:100%; padding:7%; border-radius:18%; background:linear-gradient(160deg, rgba(255,255,255,.96), rgba(226,236,244,.9)); box-shadow:0 12px 30px -14px rgba(0,0,0,.8), inset 0 1px 0 #fff}
+.qa-body{min-width:0}
+.qa-kicker{margin:0; font-size:max(calc(var(--u) * 1.06), 13px); font-weight:700; color:#438cb1; letter-spacing:-.02em}
+.qa-desc{margin:.15em 0 calc(var(--u) * 1.2); font-size:max(calc(var(--u) * 1.06), 13px); font-weight:300; color:var(--ink); letter-spacing:-.02em}
+.news{width:100%; margin-top:calc(var(--u) * 0.7); display:flex; flex-direction:column; flex:1}
+.news-updated{margin-right:auto; font-size:max(calc(var(--u) * .77), 10px); color:var(--ink-soft); font-weight:300}
+.news-head{display:flex; justify-content:flex-end; align-items:flex-end; padding-bottom:.45em; border-bottom:1px solid rgba(255,255,255,.55)}
+.news-head h3{margin:0; font-size:max(calc(var(--u) * 1.6), 14px); font-weight:400; letter-spacing:.06em}
+.news-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.news-item a{
+  display:block;
+  padding:calc(var(--u) * 1.3) calc(var(--u) * 0.6); border-bottom:1px solid rgba(255,255,255,.12);
+  border-radius:calc(var(--u) * 0.8); transition:background-color .3s;
+}
+.news-item a:hover{background:rgba(255,255,255,.06)}
+.news-item a:hover .news-title{text-decoration:underline; text-underline-offset:3px}
+.news-src{display:flex; align-items:center; gap:.5em; font-size:max(calc(var(--u) * .9), 11px); color:var(--ink-soft)}
+.news-src i{
+  display:inline-grid; place-items:center; width:1.55em; height:1.55em; border-radius:50%;
+  font-style:normal; font-weight:700; font-size:.82em; color:var(--white); background:rgba(42,112,176,.95); flex:none;
+}
+.news-title{
+  margin:.35em 0 .3em; font-size:max(calc(var(--u) * 1.06), 13px); font-weight:500; line-height:1.4; letter-spacing:-.03em; color:var(--ink);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.news-snippet{
+  margin:0; font-size:max(calc(var(--u) * .94), 12px); font-weight:300; line-height:1.6; color:var(--ink-soft); letter-spacing:-.02em;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.news-date{color:var(--ink-soft); font-weight:400}
+.news-foot{margin-top:auto; padding-top:calc(var(--u) * 1.6); display:flex; justify-content:flex-end; width:100%}
+.card--about .btn--more{margin-top:auto}
+
+/* ───────── 6. 푸터 ───────── */
+.footer{
+  display:flex; justify-content:center; align-items:center; gap:calc(var(--u) * 0.9);
+  margin-top:calc(var(--u) * 10.1); padding-bottom:calc(var(--u) * 0.5);
+}
+.footer-logo{width:calc(var(--u) * 22.1); min-width:200px; flex:none}
+.footer-info{display:flex; flex-direction:column; align-items:flex-start; gap:calc(var(--u) * 0.45); min-width:0}
+.footer-info address span{display:block}
+.footer-info address{font-style:normal; font-size:max(calc(var(--u) * 1.05), 12px); font-weight:500; line-height:1.55; color:var(--ink); letter-spacing:-.03em}
+.btn--site{height:calc(var(--u) * 1.26); min-height:24px; padding:0 .9em; font-size:max(calc(var(--u) * .74), 10px); color:var(--white); border-color:rgba(255,255,255,.7)}
+.btn--site.btn--clear{background:rgba(255,255,255,.05); box-shadow:0 6px 18px -10px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.6)}
+.btn--site.btn--clear:hover{background:rgba(255,255,255,.14)}
+
+.copyright{
+  margin:calc(var(--u) * 2.2) 0 0; padding:calc(var(--u) * 1.6) calc(var(--u) * 0.9) 0;
+  border-top:1px solid rgba(255,255,255,.14);
+  font-size:max(calc(var(--u) * 1.05), 12px); font-weight:400; letter-spacing:-.01em; color:rgba(232,240,244,.6);
+}
+/* ───────── 접속 팝업 ───────── */
+.promo{
+  position:fixed; inset:0; z-index:60; display:grid; place-items:center;
+  padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background:rgba(0,8,18,.55); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+  animation:fade .45s ease-out both;
+}
+.promo-card{
+  width:min(100%, 360px); overflow:hidden; border-radius:22px; color:var(--white);
+  background:linear-gradient(180deg, rgba(255,255,255,.18) 0, rgba(255,255,255,.04) 18%, rgba(255,255,255,0) 40%), linear-gradient(160deg, rgba(0,38,75,.72), rgba(0,12,26,.82));
+  border:1px solid rgba(255,255,255,.45);
+  -webkit-backdrop-filter:blur(16px) saturate(140%); backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 30px 70px -24px rgba(0,0,0,.85), inset 0 1.5px 0 rgba(255,255,255,.75);
+  animation:rise .55s .05s cubic-bezier(.2,.8,.2,1) both;
+}
+.promo-card:focus{outline:none}
+.promo-body{display:flex; flex-direction:column; align-items:center; gap:14px; padding:34px 24px 28px; text-align:center}
+.promo-body img{width:200px}
+.promo-body h2{margin:0; font-size:15px; font-weight:700; letter-spacing:-.03em; line-height:1.35}
+.promo-body .btn{margin-top:8px; height:38px; padding:0 1.4em; font-size:14px}
+.promo-foot{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid rgba(255,255,255,.18)}
+.promo-foot button{
+  appearance:none; border:0; background:none; cursor:pointer; padding:13px 8px;
+  font:inherit; font-size:12.5px; font-weight:400; color:rgba(232,240,244,.75); transition:background-color .25s, color .25s;
+}
+.promo-foot button + button{border-left:1px solid rgba(255,255,255,.18)}
+.promo-foot button:hover{background:rgba(255,255,255,.06); color:var(--white)}
+.promo-foot button:focus-visible{outline:2px solid var(--white); outline-offset:-3px; border-radius:0}
+
+/* ───────── 탭 1·2 자리 (미개발) ───────── */
+.tabview{
+  position:fixed; inset:0; z-index:50; display:grid; place-items:center;
+  padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background:rgba(10,30,24,.35); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+}
+.tabview .glass{max-width:420px; width:100%; padding:2.2em 1.8em; text-align:center; color:var(--white); background:linear-gradient(135deg, rgba(255,255,255,.26), rgba(255,255,255,.08))}
+.tabview h2{margin:0 0 .4em; font-size:22px; font-weight:500; letter-spacing:-.03em}
+.tabview p{margin:0 0 1.6em; font-weight:300; color:rgba(255,255,255,.85)}
+.tabview .btn{height:31px; padding:0 1.15em; font-size:12px}
+
+/* ───────── 등장 모션 ───────── */
+@keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+@keyframes fade{from{opacity:0} to{opacity:1}}
+.toplogo{animation:fade 1s .1s both}
+/* 0-1 고정 문구: 처음엔 없다가 페이드인 */
+.reveal{opacity:0; transition:opacity 1.8s ease-out}
+.reveal.is-in{opacity:1}
+.hero-lede{animation:rise 1s 1.2s both cubic-bezier(.2,.8,.2,1)}
+.btn--submit{animation:rise 1s 1.4s both cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important; transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal.reveal{transition:opacity 1.8s ease-out!important} /* 0-1 페이드인은 유지 */
+}
+
+/* ───────── 태블릿 ───────── */
+@media (max-width:1024px){
+  :root{--u:1.15vw}
+  .stats{width:86%}
+}
+
+/* ───────── 모바일 ───────── */
+@media (max-width:760px){
+  :root{--u:2.6vw; --bg-x:42%}
+  .hero::before{background:linear-gradient(to bottom, rgba(5,30,24,.25), transparent 25%, transparent 38%, rgba(6,32,26,.62) 78%, rgba(6,32,26,.3) 100%)}
+  .topbar{padding-top:18px}
+  .toplogo{width:56vw; max-width:240px; min-width:0}
+  .hosted{left:max(10px, env(safe-area-inset-left, 0px)); top:auto; bottom:44px; width:16px; min-width:0}
+  .hero-copy{right:max(18px, env(safe-area-inset-right, 0px)); left:52px; top:auto; bottom:54px}
+  .title-art{width:min(100%, 280px)}
+  .hero-lede{margin-top:18px; font-size:13.5px; line-height:1.7}
+  .hero-lede span{display:inline}
+  .hero-lede span::after{content:" "}
+  .btn--submit{margin:18px 0 0; width:123px; height:34px; min-height:0; font-size:12px}
+
+  .lower .frame{padding-block:28px 32px}
+  .stats{width:100%; min-height:0; padding:28px 18px; border-radius:20px}
+  .stats p{font-size:clamp(12px, 3.2vw, 15px)}
+  .cards{grid-template-columns:1fr; gap:18px; margin-top:22px}
+  .glass{border-radius:22px}
+  .card{min-height:0; padding:24px 18px 26px}
+  .pill{width:147px; height:34px; min-height:0; font-size:10px}
+  .about-text{margin:22px auto 18px; font-size:13px}
+  .qa{grid-template-columns:96px 1fr; gap:14px; padding-inline:2px; margin-top:20px}
+  .qa-desc{margin-bottom:12px}
+  .btn--more{width:105px; height:31px; min-height:0; font-size:12px}
+  .news{margin-top:22px}
+  .news-item a{padding:14px 2px; border-radius:12px}
+  .news-foot{padding-top:18px; justify-content:center}
+  .footer{flex-direction:column; text-align:center; gap:14px; margin-top:44px}
+  .footer-logo{width:68vw; max-width:280px; min-width:0}
+  .footer-info{align-items:center}
+  .footer-info address{font-size:12.5px}
+  .footer-info address span{display:block}
+  .btn--site{height:27px; min-height:0; font-size:10px}
+  .copyright{margin-top:28px; padding:16px 2px 0; font-size:11.5px; text-align:center}
+}
+@media (max-width:380px){
+  .hero-copy{left:40px}
+  .qa{grid-template-columns:80px 1fr}
+}
+</style>
+</head>
+<body>
+
+<noscript><style>.reveal{opacity:1}</style></noscript>
+<header class="hero" id="top">
+  <div class="frame">
+    <!-- 1-2 최상단 로고 → 홈 -->
+    <div class="topbar">
+      <a class="toplogo" href="#top" data-home aria-label="Aquatic CSI 홈으로">
+        <img src="assets/img/logo1-white.png" alt="The Shark Lab — Laboratory of Aquatic Biomedicine, Kangwon National University" width="1200" height="330">
+      </a>
+    </div>
+
+    <!-- 0-1 고정 문구: PSD 래스터 원본 사용 (폰트·자간·비율 보존) -->
+    <img class="hosted reveal" data-delay="700" src="assets/img/type-photoby.png" alt="Hosted by The Shark Lab · Photo by Prof. Sang Wha Kim" width="105" height="753">
+
+    <div class="hero-copy">
+      <h1 class="sr-only">새리(CSAERI) — Citizen Science for Aquatic Animal Evaluation and Research Initiative</h1>
+      <img class="title-art reveal" data-delay="150" src="assets/img/type-title.png" alt="새리 — Citizen Science for Aquatic Animal Evaluation and Research Initiative" width="1133" height="539">
+      <p class="hero-lede">
+        <span><strong>35일</strong>간 부산 북항친수공원 인공수로에 머문 흑상어, ‘<strong>부캉이</strong>’.</span>
+        <span>그 시간 동안의 영양과 건강 상태는 아직까지도 명확히 알려지지 않았습니다.</span>
+        <span>이에 모두의 기록을 모아 분석하여 정량적 진단 기준을 모색하고,</span>
+        <span>시민의 관찰과 과학이 만나 <strong>공존</strong>의 길을 찾는 <strong>시민 과학</strong>의 가능성을 탐색하고자 합니다.</span>
+      </p>
+      <!-- 2-1 → 탭 1 (미개발) -->
+      <a class="btn btn--clear btn--submit" href="submit.html">사진 제출하기<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="lower">
+  <div class="frame">
+    <!-- 3. 통계 -->
+    <section class="stats glass" aria-label="사진 수집 현황">
+      <p>
+        <span class="total">현재까지 수집된 사진 <span class="count"><span class="paren">(</span><b id="count-total">–</b><span class="paren">)</span></span>장,</span><br>
+        <span class="today">금일 수집된 사진 <span class="count"><span class="paren">(</span><b id="count-today">–</b><span class="paren">)</span></span>장</span>
+      </p>
+    </section>
+
+    <div class="cards">
+      <!-- 4. 새리(CSAERI)란? -->
+      <section class="card card--about glass" aria-labelledby="about-h">
+        <h2 class="pill" id="about-h">새리(CSAERI)란?</h2>
+        <div class="about-text">
+          <p><strong class="lead">새리: 해양동물시민과학연구프로젝트</strong><br><span class="acronym"><b>C</b>itizen <b>S</b>cience for <b>A</b>quatic Animal <b>E</b>valuation and <b>R</b>esearch <b>I</b>nitiative</span><br><em class="hl">상어</em>를 뜻하는 순우리말 <em class="hl">상아리</em>에서 유래하여, <em class="hl">청새리상어</em>와도 같이 종의 명칭에도 쓰이는 표현인 <em class="hl">새리</em>.</p>
+          <p>강원대학교 수의과대학 수생생물의학실(The Shark Lab)에서 주관하는 <em class="hl">해양동물시민과학연구프로젝트: 새리</em>의 핵심 목표는 시민과학을 통해 해양동물의 건강 상태를 기록 및 추적하고, 이를 수의학적 연구 자료로서 발전시켜 평가하는, 적절한 보호와 대응을 위한 객관적인 기준 마련입니다.</p>
+          <p>현재는 <em class="hl">부캉이</em> 한 개체에 대한 연구이나, 최근 몇 년 간 해수온 상승 및 해양환경 변화로 서식지가 북상한 대형 해양동물이 한 곳에 체류하는 일이 잦아지고 있습니다. 이러한 사례에 대비해 <em class="hl">새리</em>는 대형 해양동물의 건강 상태를 비침습적으로 관찰하고, 시간에 따른 변화를 추적할 수 있는 수의학적 평가 기준과 대응 프로토콜의 초석을 다지고자 본 프로젝트를 기획하였습니다.</p>
+          <p>누구나 직접 참여하여 연구에 기여할 수 있고, 해양동물에 대해 이해하고 새로운 지식을 창출하는, 인간과 바다가 공존할 수 있는 미래가 <em class="hl">새리</em>의 지향점입니다.</p>
+        </div>
+        <!-- 4-2 → 탭 2 (미개발) -->
+        <a class="btn btn--white btn--more" href="about.html" target="_blank" rel="noopener">자세히 보기</a>
+      </section>
+
+      <!-- 5. 관련 정보 -->
+      <section class="card card--info glass" aria-labelledby="info-h">
+        <h2 class="pill" id="info-h">관련 정보</h2>
+
+        <!-- 5 '위' -->
+        <div class="qa">
+          <img src="assets/img/logo2-emblem.png" alt="The Shark Lab 엠블럼" width="640" height="628">
+          <div class="qa-body">
+            <p class="qa-kicker">The Shark Lab 공식 Q&amp;A</p>
+            <p class="qa-desc">부산 북항의 상어 “부캉이”에 대한 Q&amp;A</p>
+            <a class="btn btn--white btn--more" href="https://aquabio.kangwon.ac.kr/shark-qa" target="_blank" rel="noopener">자세히 보기</a>
+          </div>
+        </div>
+
+        <!-- 5 '아래' : 구글 뉴스 '부캉이' 주요 뉴스 2건 -->
+        <div class="news">
+          <div class="news-head"><span class="news-updated" id="news-updated"></span><h3>NEWS</h3></div>
+          <ul class="news-list" id="news-list"></ul>
+          <div class="news-foot">
+            <a class="btn btn--white btn--more" href="https://news.google.com/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&amp;hl=ko&amp;gl=KR&amp;ceid=KR%3Ako" target="_blank" rel="noopener">더 보기</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 6. 푸터 -->
+    <footer class="footer">
+      <img class="footer-logo" src="assets/img/logo1-white.png" alt="The Shark Lab — Laboratory of Aquatic Biomedicine, Kangwon National University" width="1200" height="330">
+      <div class="footer-info">
+        <address>
+          <span>강원대학교 수의과대학 · Laboratory of Aquatic Biomedicine · The Shark Lab</span>
+          <span>강원특별자치도 춘천시 강원대학길 1(효자동) 강원대학교 수의과대학 수생생물의학실</span>
+        </address>
+        <a class="btn btn--clear btn--site" href="https://aquabio.kangwon.ac.kr/" target="_blank" rel="noopener">웹사이트로 이동</a>
+      </div>
+    </footer>
+    <p class="copyright">© 2026 수생생물의학실, 강원대학교 수의과대학. All rights reserved.</p>
+  </div>
+</main>
+
+<!-- 접속 팝업: 오늘 하루 보지 않기 / 닫기 -->
+<div class="promo" id="promo" hidden role="dialog" aria-modal="true" aria-labelledby="promo-h">
+  <div class="promo-card" tabindex="-1" id="promo-card">
+    <div class="promo-body">
+      <img src="assets/img/type-title.png" alt="" width="1133" height="539">
+      <h2 id="promo-h">찍었던 부캉이 사진은 이 곳에 제출해주세요.</h2>
+      <a class="btn btn--clear" href="submit.html" id="promo-go">바로가기<span aria-hidden="true">&nbsp;→</span></a>
+    </div>
+    <div class="promo-foot">
+      <button type="button" id="promo-today">오늘 하루 보지 않기</button>
+      <button type="button" id="promo-close">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 탭 1·2 자리 표시 (개발 전) -->
+<div class="tabview" id="tabview" hidden role="dialog" aria-modal="true" aria-labelledby="tabview-h">
+  <div class="glass">
+    <h2 id="tabview-h">준비 중입니다</h2>
+    <p id="tabview-p">이 화면은 곧 열립니다.</p>
+    <a class="btn btn--clear" href="#top" data-home>홈으로</a>
+  </div>
+</div>
+
+<script>
+/* ───────── 0-1 고정 문구 페이드인 ─────────
+   이미지가 다 받아진 뒤에 페이드 시작 (로딩 중에 애니메이션이 끝나 버리는 문제 방지) */
+document.querySelectorAll(".reveal").forEach(img => {
+  let done = false;
+  const go = () => { if (done) return; done = true;
+    setTimeout(() => requestAnimationFrame(() => img.classList.add("is-in")), +img.dataset.delay || 0); };
+  if (img.complete && img.naturalWidth) go();
+  else { img.addEventListener("load", go); img.addEventListener("error", go); setTimeout(go, 4000); }
+});
+
+/* ───────── 뉴스 ─────────
+   data/news.json 은 GitHub Actions(.github/workflows/deploy.yml)가 매시간 구글 뉴스에서 새로 받아 배포.
+   불러오기 실패 시 아래 NEWS(마지막 확인본) 표시 */
+const NEWS_URL = "data/news.json";
+const NEWS = [
+  {
+    "source": "파이낸셜뉴스",
+    "mark": "파",
+    "title": "부산시, '부캉이'로 도시브랜드 대상...시민 참여형 브랜딩 효과",
+    "date": "2026. 11. 20.",
+    "snippet": "부산시가 상어 캐릭터 '부캉이'를 활용한 창의적인 도시브랜드 홍보 전략으로 '제4회 대한민국 공공브랜드대상' 도시브랜드 부문 대상을 수상했다고 20일 밝혔다.",
+    "url": "https://www.fnnews.com/news/202611201653456267"
+  },
+  {
+    "source": "글로벌경제신문",
+    "mark": "글",
+    "title": "부산시, '부캉이' 대한민국 공공브랜드대상 도시브랜드 부문 대상 수상",
+    "date": "2026. 11. 21.",
+    "snippet": "지난 9월 부산시 동구 북항 친수공원에 출몰한 상어 ‘부캉이’가 대한민국 도시브랜드 대상을 거머쥐며 시민 참여형 도시마케팅의 새로운 성공 모델로 떠올랐다.",
+    "url": "https://www.getnews.co.kr/news/articleView.html?idxno=887989"
+  }
+];
+
+/* ───────── 수집 현황 ─────────
+   백엔드 연결 후 setPhotoCounts(전체, 금일) 호출 */
+function setPhotoCounts(total, today){
+  const fmt = n => Number(n).toLocaleString("ko-KR");
+  const run = (el, to) => {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { el.textContent = fmt(to); return; }
+    const t0 = performance.now(), d = 1100;
+    const step = t => { const p = Math.min(1, (t - t0) / d); el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  run(document.getElementById("count-total"), total);
+  run(document.getElementById("count-today"), today);
+}
+window.setPhotoCounts = setPhotoCounts;
+
+function renderNews(items, updated){
+  const list = document.getElementById("news-list");
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "#";
+  list.innerHTML = items.slice(0, 2).map(n => `
+    <li class="news-item">
+      <a href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener">
+        <div class="news-src"><i aria-hidden="true">${esc(n.mark || (n.source || "N").charAt(0))}</i>${esc(n.source)}</div>
+        <p class="news-title">${esc(n.title)}</p>
+        <p class="news-snippet">${n.date ? `<span class="news-date">${esc(n.date)}${n.snippet ? " — " : ""}</span>` : ""}${esc(n.snippet)}</p>
+      </a>
+    </li>`).join("");
+  const up = document.getElementById("news-updated");
+  const d = updated ? new Date(updated) : null;
+  up.textContent = d && !isNaN(d)
+    ? `업데이트 ${d.toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })}`
+    : "";
+}
+async function loadNews(){
+  renderNews(NEWS);
+  try {
+    // GitHub Pages(max-age 600)·Cloudflare 캐시 우회
+    const res = await fetch(`${NEWS_URL}?v=${Math.floor(Date.now() / 300000)}`, { cache: "no-store" });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (Array.isArray(data.items) && data.items.length) renderNews(data.items, data.checked || data.updated);
+  } catch (_) { /* 확인본 유지 */ }
+}
+loadNews();
+
+/* ───────── 탭 1·2 / 홈 ───────── */
+(function router(){
+  const view = document.getElementById("tabview");
+  const copy = {
+    tab1: ["사진 제출", "사진 제출 화면(탭 1)은 개발 중입니다."]
+  };
+  const open = key => {
+    document.getElementById("tabview-h").textContent = copy[key][0];
+    document.getElementById("tabview-p").textContent = copy[key][1];
+    view.hidden = false;
+  };
+  const close = () => { view.hidden = true; };
+  document.querySelectorAll("[data-tab]").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault(); open(a.dataset.tab);
+    try { history.replaceState(null, "", "#" + a.dataset.tab); } catch (_) {}
+  }));
+  document.querySelectorAll("[data-home]").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault(); close(); window.scrollTo({top:0, behavior:"smooth"});
+    try { history.replaceState(null, "", location.pathname); } catch (_) {}
+  }));
+  view.addEventListener("click", e => { if (e.target === view) close(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  const h = location.hash.slice(1);
+  if (copy[h]) open(h);
+})();
+
+/* ───────── 접속 팝업 ─────────
+   '오늘 하루 보지 않기' → 오늘 자정(접속자 기기 시각)까지 숨김 */
+(function promo(){
+  const KEY = "csaeri-popup-hide-until";
+  const el = document.getElementById("promo");
+  let hideUntil = 0;
+  try { hideUntil = +localStorage.getItem(KEY) || 0; } catch (_) {}
+  if (Date.now() < hideUntil || location.hash === "#tab1") return;
+
+  const close = () => { el.hidden = true; document.removeEventListener("keydown", onKey); };
+  const onKey = e => { if (e.key === "Escape") close(); };
+  document.getElementById("promo-close").addEventListener("click", close);
+  document.getElementById("promo-today").addEventListener("click", () => {
+    const end = new Date(); end.setHours(24, 0, 0, 0);
+    try { localStorage.setItem(KEY, String(end.getTime())); } catch (_) {}
+    close();
+  });
+  el.addEventListener("click", e => { if (e.target === el) close(); });
+
+  setTimeout(() => {
+    el.hidden = false;
+    document.addEventListener("keydown", onKey);
+    document.getElementById("promo-card").focus({ preventScroll: true });
+  }, 700);
+})();
+</script>
+
+</body>
+</html>
