@@ -1,26 +1,26 @@
 {
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
-  "updated": "2026-11-24T01:23:18.177Z",
-  "checked": "2026-11-24T01:23:18.177Z",
+  "updated": "2026-11-24T05:12:43.618Z",
+  "checked": "2026-11-24T05:12:43.618Z",
   "items": [
     {
-      "source": "부산일보",
-      "mark": "부",
-      "title": "부산 북항 떠난 ‘부캉이’ 공공브랜드대상 남겼다",
-      "date": "2026. 11. 22.",
-      "published": "2026-11-22T09:23:04.000Z",
-      "snippet": "",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5aZ1FpS0N3S3lxLUlCak8wU2Q3SmVfb1VlOUl0cnBPYzhxR0VIX1B0a2U2UUo0LTU4dkFFbDZGODRjV2NPbkZoVU93RlJKbjI2Yk1rM1R4OUJHR055UDFXMERjNXBHVUszejdoYUducWZ1VDVaYkJaNQ?oc=5"
-    },
-    {
-      "source": "미주중앙일보",
-      "mark": "미",
+      "source": "중앙일보",
+      "mark": "중",
       "title": "[최준호의 사이언스&] 부산 홀린 흑상어 ‘부캉이’…뜨거워진 바다가 보낸 경고",
       "date": "2026. 11. 24.",
       "published": "2026-11-23T15:12:00.000Z",
-      "snippet": "늦가을 바람에 억새 들판이 흔들렸지만, 여전히 따뜻했다. 부캉이가 떠난 지 21일 만인 지난 17일 부산 북항을 찾았다. 부캉이를 보려고 전국에서 한 달 열흘간 160만 명이 몰려들었다는 북항 친수공원엔 이제 인파는...",
-      "url": "https://www.koreadaily.com/article/20261123071233787"
+      "snippet": "늦가을 바람에 억새 들판이 흔들렸지만, 여전히 따뜻했다. 부캉이가 떠난 지 21일 만인 지난 17일 부산 북항을 찾았다. 부캉이를 보려고 전국에서 한 달 열흘간 160만 명이 몰려들었다는 북항 친수공원엔 이제 인파는 사라졌지만 낮 기온은 섭씨 18도까지 올랐다. 북항 인근 수온도 18도 안팎으로, 30년 단위 평년의 11월 중순보다 1도 높은 수준이었다. 인공수로 끝에 길이 290m, 11만5000t급 대형 호화 크루즈선 다이아몬드 프린세스호가 정박해 있었다.",
+      "url": "https://www.joongang.co.kr/article/25481270"
+    },
+    {
+      "source": "뉴스1",
+      "mark": "뉴",
+      "title": "'유럽판 부캉이' 혹등고래 티미 사인은 굶주림…그물 걸려 몇달 헤매",
+      "date": "2026. 11. 24.",
+      "published": "2026-11-24T03:26:23.000Z",
+      "snippet": "",
+      "url": "https://www.news1.kr/world/general-world/6364051"
     }
   ]
 }
