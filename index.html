@@ -546,6 +546,17 @@ function setPhotoCounts(total, today){
 }
 window.setPhotoCounts = setPhotoCounts;
 
+/* 수집 현황: Worker /stats (사진+동영상 파일 수, 전체 / 오늘·한국 시간) */
+const STATS_URL = "https://csaeri-submit.ryuyj39.workers.dev/stats";
+(async function loadStats(){
+  try {
+    const res = await fetch(STATS_URL, { cache: "no-store" });
+    if (!res.ok) return;
+    const d = await res.json();
+    if (d.result === "success" && Number.isFinite(d.total) && Number.isFinite(d.today)) setPhotoCounts(d.total, d.today);
+  } catch (_) { /* 실패 시 (–) 유지 */ }
+})();
+
 function renderNews(items, updated){
   const list = document.getElementById("news-list");
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
