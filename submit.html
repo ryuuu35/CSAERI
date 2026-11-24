@@ -166,6 +166,14 @@
   .sub { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
   .sub[hidden] { display: none; }
   .sub-title { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  /* 촬영 방향 실루엣 */
+  .seg .ico { display: block; width: 100%; max-width: 120px; height: 52px; margin: 2px auto 8px; object-fit: contain; transition: filter .15s; }
+  .seg input:checked + span .ico { filter: brightness(0) saturate(100%) invert(10%) sepia(32%) saturate(1500%) hue-rotate(170deg); } /* 선택 시 짙은 남색 */
+  /* 촬영 기종 */
+  .device-seg { grid-template-columns: repeat(3, 1fr); }
+  .media-seg { grid-template-columns: repeat(2, 1fr); }
+  #photo-box[hidden], #video-box[hidden] { display: none; }
+  #device-model { margin-top: 10px; }
 
   /* 동의 */
   .consent-row { display: flex; padding: 10px 0; }
@@ -258,19 +266,30 @@
       <p class="err" id="err-name"></p>
     </div>
 
-    <!-- 2. 사진 업로드 -->
+    <!-- 2. 사진·동영상 업로드: 종류 선택 후 해당 업로드란 표시 -->
     <div class="field">
-      <div class="label"><span class="num">2</span>사진 업로드 <span class="req">*</span></div>
-      <label class="drop" for="photo">
-        <input type="file" id="photo" accept=".jpg,.jpeg,.png,.heic,.heif,.webp,image/jpeg,image/png,image/heic,image/heif,image/webp">
-        <span class="drop-text" id="drop-text"><b>사진 1장 선택</b><br>탭하여 앨범에서 사진을 선택하세요</span>
-        <img id="preview" alt="선택한 사진 미리보기" hidden>
-      </label>
-      <p class="err" id="err-photo"></p>
+      <div class="label"><span class="num">2</span>사진·동영상 업로드 <span class="req">*</span></div>
+      <p class="hint" style="margin:-4px 0 12px">사진과 동영상 중 하나 이상을 올려 주세요. (중복 가능)</p>
+      <div class="seg media-seg">
+        <label><input type="checkbox" name="media" value="photo" id="media-photo"><span>사진</span></label>
+        <label><input type="checkbox" name="media" value="video" id="media-video"><span>동영상</span></label>
+      </div>
+      <p class="err" id="err-media"></p>
 
-      <!-- 2-1. 동영상 업로드 (선택) -->
-      <div class="sub">
-        <div class="sub-title">2-1. 동영상 업로드 <span class="opt">(선택)</span></div>
+      <!-- 2-1. 사진 -->
+      <div class="sub" id="photo-box" hidden>
+        <div class="sub-title">2-1. 사진 업로드 <span class="req">*</span></div>
+        <label class="drop" for="photo">
+          <input type="file" id="photo" accept=".jpg,.jpeg,.png,.heic,.heif,.webp,image/jpeg,image/png,image/heic,image/heif,image/webp">
+          <span class="drop-text" id="drop-text"><b>사진 1장 선택</b><br>탭하여 앨범에서 사진을 선택하세요</span>
+          <img id="preview" alt="선택한 사진 미리보기" hidden>
+        </label>
+        <p class="err" id="err-photo"></p>
+      </div>
+
+      <!-- 2-2. 동영상 -->
+      <div class="sub" id="video-box" hidden>
+        <div class="sub-title">2-2. 동영상 업로드 <span class="req">*</span></div>
         <label class="drop drop-video" for="video">
           <input type="file" id="video" accept=".mp4,.mov,.m4v,.webm,video/mp4,video/quicktime,video/x-m4v,video/webm">
           <span class="drop-text" id="video-text"><b>동영상 1개 선택</b><br>탭하여 앨범에서 동영상을 선택하세요</span>
@@ -326,6 +345,19 @@
       </div>
       <p class="hint" id="dt-hint"></p>
       <p class="err" id="err-dt"></p>
+
+      <!-- 3-1. 촬영 기종 -->
+      <div class="sub">
+        <div class="sub-title">3-1. 촬영 기종 선택 <span class="req">*</span></div>
+        <div class="seg device-seg">
+          <label><input type="radio" name="device" value="아이폰"><span>아이폰</span></label>
+          <label><input type="radio" name="device" value="삼성"><span>삼성</span></label>
+          <label><input type="radio" name="device" value="기타"><span>기타</span></label>
+        </div>
+        <input type="text" id="device-model" maxlength="60" placeholder="기종명 입력 (선택) · 예: iPhone 15 Pro, Galaxy S24" autocomplete="off">
+        <p class="hint" id="device-hint"></p>
+        <p class="err" id="err-device"></p>
+      </div>
     </div>
 
     <!-- 4. 사진 분류 -->
@@ -339,17 +371,17 @@
       <div class="sub" id="sub-full" hidden>
         <div class="sub-title">4-1. 전신 사진 촬영 방향 <span class="req">*</span></div>
         <div class="seg">
-          <label><input type="radio" name="view" value="옆면"><span>옆면</span></label>
-          <label><input type="radio" name="view" value="위에서 봄"><span>위에서 봄</span></label>
+          <label><input type="radio" name="view" value="옆면"><span><img class="ico" src="assets/img/shark-side.png" alt="" width="360" height="180">옆면</span></label>
+          <label><input type="radio" name="view" value="위에서 봄"><span><img class="ico" src="assets/img/shark-top.png" alt="" width="360" height="194">위에서 봄</span></label>
         </div>
       </div>
 
       <div class="sub" id="sub-wound" hidden>
         <div class="sub-title">4-2. 상처 부위 사진 촬영 방향 <span class="req">*</span></div>
         <div class="seg">
-          <label><input type="radio" name="view" value="옆면"><span>옆면</span></label>
-          <label><input type="radio" name="view" value="위에서 봄"><span>위에서 봄</span></label>
-          <label><input type="radio" name="view" value="기타"><span>기타<small>상처 등 일부 부위만 클로즈업 등</small></span></label>
+          <label><input type="radio" name="view" value="옆면"><span><img class="ico" src="assets/img/shark-side.png" alt="" width="360" height="180">옆면</span></label>
+          <label><input type="radio" name="view" value="위에서 봄"><span><img class="ico" src="assets/img/shark-top.png" alt="" width="360" height="194">위에서 봄</span></label>
+          <label><input type="radio" name="view" value="기타"><span>기타<small>일부 부위만 클로즈업</small></span></label>
         </div>
       </div>
       <p class="err" id="err-type"></p>
@@ -424,7 +456,7 @@
 <script src="https://cdn.jsdelivr.net/npm/exifr@7/dist/lite.umd.js"></script>
 <script>
 (() => {
-  const ENDPOINT = 'https://submit.example.com/submit'; // Cloudflare Worker 주소 (Apps Script URL 직접 입력 금지)
+  const ENDPOINT = 'https://submit.csaeri.co.kr/submit'; // Cloudflare Worker 주소 (Worker → Settings → Domains에 연결한 주소)
   const VIDEO_ENDPOINT = ENDPOINT.replace(/\/submit$/, '/video');
   const MAX_VIDEO_MB = 300;                 // Code.gs의 MAX_VIDEO_BYTES와 일치
   const CHUNK = 8 * 1024 * 1024;            // 8MB (256KB의 배수여야 함)
@@ -531,7 +563,25 @@
       applyDateTime(exif.takenAt);
       $('#dt-hint').textContent = '사진 정보에서 촬영 일시가 자동 입력되었습니다. 실제와 다르면 수정해 주세요.';
     }
+    // 사진 정보의 제조사·모델로 기종 자동 제안 (사용자가 이미 고른 경우 건드리지 않음)
+    if ((exif.make || exif.model) && !deviceTouched) {
+      const mk = (exif.make + ' ' + exif.model).toLowerCase();
+      const pick = /apple|iphone/.test(mk) ? '아이폰' : /samsung|galaxy|sm-/.test(mk) ? '삼성' : '기타';
+      const r = form.querySelector(`input[name=device][value="${pick}"]`);
+      if (r) r.checked = true;
+      if (!deviceModel.value.trim()) deviceModel.value = [exif.make, exif.model].filter(Boolean).join(' ').slice(0, 60);
+      setErr('device', '');
+      $('#device-hint').textContent = '사진 정보에서 기종이 자동 입력되었습니다. 실제와 다르면 수정해 주세요.';
+    }
   });
+
+  /* ---------- 3-1. 촬영 기종 ---------- */
+  const deviceModel = $('#device-model');
+  let deviceTouched = false;
+  $$('input[name=device]').forEach(r => r.addEventListener('change', () => {
+    deviceTouched = true; setErr('device', ''); $('#device-hint').textContent = '';
+  }));
+  deviceModel.addEventListener('input', () => { deviceTouched = true; $('#device-hint').textContent = ''; });
 
   // 미리보기: blob: URL은 일부 환경(미리보기 iframe·CSP·인앱 브라우저)에서 차단되므로
   // data: URL(FileReader)을 1순위로, 브라우저가 직접 못 그리는 형식(HEIC 등)은 canvas로 변환
@@ -558,10 +608,14 @@
     if (typeof exifr === 'undefined') return {};
     const out = {};
     try {
-      const meta = await exifr.parse(file, ['DateTimeOriginal']).catch(() => null);
+      const meta = await exifr.parse(file, ['DateTimeOriginal', 'Make', 'Model']).catch(() => null);
       const t = meta && meta.DateTimeOriginal;
       if (t instanceof Date && !isNaN(t)) {
         out.takenAt = `${keyOf(t)}T${pad(t.getHours())}:${pad(t.getMinutes())}`;
+      }
+      if (meta && (meta.Make || meta.Model)) {
+        out.make = String(meta.Make || '').trim();
+        out.model = String(meta.Model || '').trim();
       }
     } catch (_) {}
     return out;
@@ -607,6 +661,7 @@
       clearVideo(); setErr('video', `동영상은 ${MAX_VIDEO_MB}MB 이하만 업로드할 수 있습니다. (선택한 파일: ${fmtMB(f.size)})`); return;
     }
     videoFile = f; videoType = type;
+    setErr('video', '');
     $('#video-text').hidden = true;
     $('#video-info').textContent = `${f.name} · ${fmtMB(f.size)}`;
     $('#video-meta').hidden = false;
@@ -626,6 +681,25 @@
     try { vPrev.src = URL.createObjectURL(f); } catch (_) { vPrev.hidden = true; }
   });
   $('#video-remove').addEventListener('click', clearVideo);
+
+  /* ---------- 2. 자료 종류 선택 → 업로드란 표시 ---------- */
+  function clearPhoto() {
+    photoFile = null; exif = {};
+    $('#photo').value = '';
+    const prev = $('#preview'); prev.hidden = true; prev.removeAttribute('src');
+    $('#drop-text').hidden = false;
+    setErr('photo', '');
+  }
+  $('#media-photo').addEventListener('change', (e) => {
+    $('#photo-box').hidden = !e.target.checked;
+    if (!e.target.checked) clearPhoto();
+    setErr('media', '');
+  });
+  $('#media-video').addEventListener('change', (e) => {
+    $('#video-box').hidden = !e.target.checked;
+    if (!e.target.checked) { clearVideo(); setErr('video', ''); }
+    setErr('media', '');
+  });
 
   /* ---------- 3. 날짜(달력 팝오버) + 시간 ---------- */
   let selDate = null, dtTouched = false, viewY, viewM;
@@ -788,7 +862,10 @@
     let ok = true;
 
     if (!anon.checked && !nameIn.value.trim()) { setErr('name', '제출자명을 입력하거나 익명을 선택해 주세요.'); ok = false; }
-    if (!photoFile) { setErr('photo', '사진을 업로드해 주세요.'); ok = false; }
+    const wantPhoto = $('#media-photo').checked, wantVideo = $('#media-video').checked;
+    if (!wantPhoto && !wantVideo) { setErr('media', '사진과 동영상 중 올릴 자료를 선택해 주세요.'); ok = false; }
+    if (wantPhoto && !photoFile) { setErr('photo', '사진을 선택해 주세요.'); ok = false; }
+    if (wantVideo && !videoFile) { setErr('video', '동영상을 선택해 주세요.'); ok = false; }
 
     let shotAt = '';
     if (!selDate || !hourSel.value || !minSel.value) {
@@ -797,6 +874,9 @@
       shotAt = `${selDate}T${hourSel.value}:${minSel.value}`;
       if (new Date(shotAt) > new Date()) { setErr('dt', '현재 이후의 시각은 선택할 수 없습니다.'); ok = false; }
     }
+
+    const device = form.querySelector('input[name=device]:checked');
+    if (!device) { setErr('device', '촬영 기종을 선택해 주세요.'); ok = false; }
 
     const type = form.querySelector('input[name=type]:checked');
     const view = form.querySelector('input[name=view]:checked');
@@ -819,7 +899,7 @@
     submitBtn.disabled = true;
     submitBtn.textContent = '업로드 중…';
     try {
-      const image = await toJpegDataURL(photoFile);
+      const image = photoFile ? await toJpegDataURL(photoFile) : '';   // 동영상만 제출 시 빈 값
       const payload = {
         image,
         name: anon.checked ? '' : nameIn.value.trim(),
@@ -827,6 +907,9 @@
         shotAt,
         type: type.value,
         view: view.value,
+        media: [photoFile && 'photo', videoFile && 'video'].filter(Boolean),   // 서버에서 저장 폴더 분기용
+        device: device.value,
+        deviceModel: deviceModel.value.trim(),
         consentPrivacy: true,
         consentPhoto: true,
         website: form.website.value
@@ -844,6 +927,7 @@
       catch (_) { throw new Error('서버 응답이 JSON이 아닙니다. 웹 앱 배포의 액세스 권한이 "모든 사용자"인지 확인해 주세요.'); }
       if (r.result !== 'success') throw new Error(r.error || '서버 오류');
 
+      if (videoFile && !r.videoToken) throw new Error('서버가 동영상 업로드 토큰을 주지 않았습니다. 서버(Code.gs)가 사진 없이 동영상만 받는 경우를 처리하는지 확인해 주세요.');
       if (videoFile && r.videoToken) {
         pendingToken = r.videoToken;
         await runVideoUpload();
@@ -918,8 +1002,8 @@
     } catch (err) {
       window.removeEventListener('beforeunload', onLeave);
       $('#progress').hidden = true;
-      submitBtn.textContent = '사진 제출 완료';
-      setErr('submit', '사진은 제출되었으나 동영상 업로드에 실패했습니다. 아래 버튼으로 다시 시도해 주세요. (' + err.message + ')');
+      submitBtn.textContent = photoFile ? '사진 제출 완료' : '제출 정보 접수됨';
+      setErr('submit', (photoFile ? '사진은 제출되었으나' : '제출 정보는 접수되었으나') + ' 동영상 업로드에 실패했습니다. 아래 버튼으로 다시 시도해 주세요. (' + err.message + ')');
       $('#retry-btn').hidden = false;
     }
   }
