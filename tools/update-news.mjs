@@ -6,7 +6,8 @@
  * 실행: node tools/update-news.mjs          (Node 18 이상, 외부 패키지 없음)
  * 주기 실행: .github/workflows/deploy.yml (GitHub Actions, 매시간) 이 실행 후 Pages 배포
  *
- * 1) 구글 뉴스 스토리(주요 뉴스) RSS → 실패/빈 결과면 검색 RSS  ← 여기까지만 성공하면 갱신됨
+ * 1) 구글 뉴스 검색 RSS('부캉이', 메인 '더 보기' 링크와 같은 검색)  ← 여기까지만 성공하면 갱신됨
+ *    (스토리 RSS는 '사용할 수 없는 피드입니다.' 가짜 항목만 돌려주어 제외)
  * 2) (선택) news.google.com 중계 링크를 실제 기사 URL로 변환 → 기사 요약(og:description) 추출
  *    2단계가 실패해도 제목·언론사·날짜·구글 뉴스 링크로 정상 갱신
  * 3) 피드 자체를 못 받으면 기존 news.json 을 덮어쓰지 않음(종료 코드 1)
@@ -21,7 +22,6 @@ const QUERY = process.env.NEWS_QUERY || "부캉이";
 const STORY_ID = process.env.NEWS_STORY_ID || "CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2liX3QtV0VoRUMteGVJRHpCb1NpZ0FQAQ";
 const LOCALE = "hl=ko&gl=KR&ceid=KR:ko";
 const FEEDS = (process.env.NEWS_FEEDS ? process.env.NEWS_FEEDS.split(",") : [
-  `https://news.google.com/rss/stories/${STORY_ID}?${LOCALE}`,
   `https://news.google.com/rss/search?q=${encodeURIComponent(QUERY)}&${LOCALE}`,
 ]);
 const LIMIT = 2;
@@ -75,7 +75,10 @@ function parseRss(xml) {
       link: decodeEntities(tag(it, "link")).trim(),
       pubDate: tag(it, "pubDate").trim(),
     };
-  }).filter(x => x.title && x.link);
+  }).filter(x =>
+    x.title && x.link && x.source &&                       // 언론사 없는 항목(구글 안내 문구) 제외
+    /\/articles\//.test(x.link) &&                        // 실제 기사 링크만
+    !/사용할 수 없는 피드|feed is unavailable/i.test(x.title));
 }
 
 /* ── news.google.com 중계 링크 → 실제 기사 URL ── */
