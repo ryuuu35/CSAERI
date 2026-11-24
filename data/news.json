@@ -1,8 +1,8 @@
 {
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
-  "updated": "2026-11-24T12:02:16.222Z",
-  "checked": "2026-11-24T12:02:16.222Z",
+  "updated": "2026-11-24T15:05:51.850Z",
+  "checked": "2026-11-24T15:05:51.850Z",
   "items": [
     {
       "source": "중앙일보",
@@ -14,13 +14,13 @@
       "url": "https://www.joongang.co.kr/article/25481270"
     },
     {
-      "source": "국제신문",
-      "mark": "국",
-      "title": "[과학에세이] 부캉이가 떠난 자리, 우리에게 남긴 것",
-      "date": "2026. 11. 23.",
-      "published": "2026-11-23T09:48:00.000Z",
+      "source": "뉴스1",
+      "mark": "뉴",
+      "title": "'유럽판 부캉이' 혹등고래 티미 사인은 굶주림…그물 걸려 몇달 헤매",
+      "date": "2026. 11. 24.",
+      "published": "2026-11-24T03:26:23.000Z",
       "snippet": "",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdjBDUDhBMUxkVUVLNVNULUtlSXlsRHdWb18tOWUwNFNzWEF0VFR2d0cxelZIX1ZCZkRGNWZUcllEUV9EbDE5eV9OUzFrU1RkelU3MmZUaDVsWGpNc0VVR3BOSzRZb25FdWdiRjZCS3Nza1kwN1poNlA5R0RaVXFHZ3p5ZnFMNndmaEhNdy1B?oc=5"
+      "url": "https://www.news1.kr/world/general-world/6364051"
     }
   ]
 }
