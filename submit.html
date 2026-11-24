@@ -456,7 +456,7 @@
 <script src="https://cdn.jsdelivr.net/npm/exifr@7/dist/lite.umd.js"></script>
 <script>
 (() => {
-  const ENDPOINT = 'https://submit.csaeri.co.kr/submit'; // Cloudflare Worker 주소 (Worker → Settings → Domains에 연결한 주소)
+  const ENDPOINT = 'https://csaeri-submit.ryuyj39.workers.dev/submit'; // Cloudflare Worker 주소 (submit.csaeri.co.kr 연결 후 교체 가능)
   const VIDEO_ENDPOINT = ENDPOINT.replace(/\/submit$/, '/video');
   const MAX_VIDEO_MB = 300;                 // Code.gs의 MAX_VIDEO_BYTES와 일치
   const CHUNK = 8 * 1024 * 1024;            // 8MB (256KB의 배수여야 함)
