@@ -571,7 +571,9 @@ async function loadNews(){
     const res = await fetch(`${NEWS_URL}?v=${Math.floor(Date.now() / 300000)}`, { cache: "no-store" });
     if (!res.ok) return;
     const data = await res.json();
-    if (Array.isArray(data.items) && data.items.length) renderNews(data.items, data.checked || data.updated);
+    const items = (Array.isArray(data.items) ? data.items : [])
+      .filter(n => n && n.title && n.source && n.source !== "news.google.com" && !/사용할 수 없는 피드/.test(n.title));
+    if (items.length) renderNews(items, data.checked || data.updated);
   } catch (_) { /* 확인본 유지 */ }
 }
 loadNews();
