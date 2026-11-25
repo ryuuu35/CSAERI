@@ -1,9 +1,18 @@
 {
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
-  "updated": "2026-11-24T22:00:44.497Z",
-  "checked": "2026-11-24T22:00:44.497Z",
+  "updated": "2026-11-25T02:59:51.993Z",
+  "checked": "2026-11-25T02:59:51.993Z",
   "items": [
+    {
+      "source": "동아일보",
+      "mark": "동",
+      "title": "부산 명물 된 ‘부캉이’… 공공브랜드 대상 선물",
+      "date": "2026. 11. 24.",
+      "published": "2026-11-23T19:30:00.000Z",
+      "snippet": "부산시는 사단법인 한국공공브랜드진흥원이 주최한 ‘제4회 대한민국 공공브랜드대상’에서 도시브랜드 부문 대상을 수상했다고 23일 밝혔다. 이 상은 공공 가치를 높이고 국가브랜드 경쟁력 향상에 기여한 우수 브랜드를 선정하는 것으로 산업통상부가 후원한다. 심사위원단은 해양·…",
+      "url": "https://www.donga.com/news/Society/article/all/20261123/135076340/2"
+    },
     {
       "source": "국제신문",
       "mark": "국",
@@ -12,15 +21,6 @@
       "published": "2026-11-23T09:48:00.000Z",
       "snippet": "",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdjBDUDhBMUxkVUVLNVNULUtlSXlsRHdWb18tOWUwNFNzWEF0VFR2d0cxelZIX1ZCZkRGNWZUcllEUV9EbDE5eV9OUzFrU1RkelU3MmZUaDVsWGpNc0VVR3BOSzRZb25FdWdiRjZCS3Nza1kwN1poNlA5R0RaVXFHZ3p5ZnFMNndmaEhNdy1B?oc=5"
-    },
-    {
-      "source": "뉴스1",
-      "mark": "뉴",
-      "title": "'유럽판 부캉이' 혹등고래 티미 사인은 굶주림…그물 걸려 몇달 헤매",
-      "date": "2026. 11. 24.",
-      "published": "2026-11-24T03:26:23.000Z",
-      "snippet": "",
-      "url": "https://www.news1.kr/world/general-world/6364051"
     }
   ]
 }
