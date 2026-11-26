@@ -1,8 +1,8 @@
 {
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
-  "updated": "2026-11-26T15:06:48.730Z",
-  "checked": "2026-11-26T15:06:48.730Z",
+  "updated": "2026-11-26T16:16:29.658Z",
+  "checked": "2026-11-26T16:16:29.658Z",
   "items": [
     {
       "source": "연합뉴스",
@@ -14,13 +14,13 @@
       "url": "https://www.yna.co.kr/view/AKR20261126061900051"
     },
     {
-      "source": "연합뉴스TV",
-      "mark": "연",
-      "title": "부캉이 떠나자 방문객도 ’뚝’…다시 한산해진 북항 친수공원",
+      "source": "부산일보",
+      "mark": "부",
+      "title": "부캉이로 뜬 북항, 상시 콘텐츠·랜드마크 해법 찾아야",
       "date": "2026. 11. 26.",
-      "published": "2026-11-26T06:01:00.000Z",
-      "snippet": "국민상어 ’부캉이’가 떠나자, 부산 북항친수공원도 예전 모습으로 돌아갔습니다. 오늘(26일) 부산시설공단에 따르면 부캉이가 출몰한 지난 9월 19일부터 지난달 21일까지 한 달여간 북항친수공원을 찾은 방문객은 168만 1,800명에 달했습니다. 지난해 연간 142만 2",
-      "url": "https://www.yonhapnewstv.co.kr/news/AKR20261126150113xUK"
+      "published": "2026-11-26T02:01:45.000Z",
+      "snippet": "",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9fSWN5ZmVPUE95UmxmSzUwSWlJRV9nX2EyRU13amdaa1VFMDdueExJVS1JYXV1SHlBaFdNNHZoZENvQTZscEpjc2RYRzZ2c0tncnc3Qm5sOXNleUlKRGlKRUEtUmwzODNVWUxFUm9SbjBqQl9C?oc=5"
     }
   ]
 }
