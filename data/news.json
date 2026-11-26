@@ -1,8 +1,8 @@
 {
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
-  "updated": "2026-11-26T02:59:09.879Z",
-  "checked": "2026-11-26T02:59:09.879Z",
+  "updated": "2026-11-26T04:05:36.704Z",
+  "checked": "2026-11-26T04:05:36.704Z",
   "items": [
     {
       "source": "연합뉴스",
@@ -16,11 +16,11 @@
     {
       "source": "부산일보",
       "mark": "부",
-      "title": "마스코트 부캉이 떠난 북항, 발길 `뚝`… 다시 `북 ~ 휑`",
-      "date": "2026. 11. 25.",
-      "published": "2026-11-25T09:41:24.000Z",
+      "title": "부캉이로 뜬 북항, 상시 콘텐츠·랜드마크 해법 찾아야",
+      "date": "2026. 11. 26.",
+      "published": "2026-11-26T02:01:45.000Z",
       "snippet": "",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9FSE40MnVZN3pCOGVJN0pPLUtxRWZQR0FIczVZcXNMcEQ0VGRReTYwbHZTaFhFR0t2cEljdHFCUWg0UVlqVFdkRkh0RG5KVzFNcHJEODFVM1F5RlIxS1kzSC14eFpsMXFQaWNOMGRKT29MQkZT?oc=5"
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9fSWN5ZmVPUE95UmxmSzUwSWlJRV9nX2EyRU13amdaa1VFMDdueExJVS1JYXV1SHlBaFdNNHZoZENvQTZscEpjc2RYRzZ2c0tncnc3Qm5sOXNleUlKRGlKRUEtUmwzODNVWUxFUm9SbjBqQl9C?oc=5"
     }
   ]
 }
