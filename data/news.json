@@ -1,8 +1,29 @@
 {
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
-  "updated": "2026-11-27T08:33:00.822Z",
-  "checked": "2026-11-27T08:33:00.822Z",
+  "featuredQuery": "부캉이 김상화",
+  "updated": "2026-11-27T10:19:25.089Z",
+  "checked": "2026-11-27T10:19:25.089Z",
+  "featured": [
+    {
+      "source": "MBC 뉴스",
+      "mark": "M",
+      "title": "\"부캉이 괜찮나요?\" 직접 보고 온 상어전문가에 물으니 [모닝콜]",
+      "date": "2026. 10. 14.",
+      "published": "2026-10-14T07:00:00.000Z",
+      "snippet": "■ 방송 : MBC 뉴스투데이 (월~금 오전 06:00, 토 오전 07:00) ■ 진행 : 정슬기 ■ 대담자 : 김상화 강원대 수의학과 샤크랩 교수 정슬기> 흑상어 부캉이가 부산 ...",
+      "url": "https://imnews.imbc.com/replay/2026/nwtoday/article/6857792_37012.html"
+    },
+    {
+      "source": "시사프리즘",
+      "mark": "시",
+      "title": "바다로 나갔다 돌아온 ‘부캉이’…흑상어는 왜 북항으로 돌아오나",
+      "date": "2026. 10. 22.",
+      "published": "2026-10-22T07:00:00.000Z",
+      "snippet": "",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9YMVU2WTJoSXlmZDM0dDBFNXFpMTV1MnNEZkNHN210WmhWVUR0LUsySUw5dFRweHVnS2JKaUVGdHk3empDOVloZHRuUkJhVHhFa1BBaklKRkxEeWROSEZBNUJDekNTREZC?oc=5"
+    }
+  ],
   "items": [
     {
       "source": "연합뉴스TV",
