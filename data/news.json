@@ -2,8 +2,8 @@
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
   "featuredQuery": "부캉이 김상화",
-  "updated": "2026-11-27T23:00:08.621Z",
-  "checked": "2026-11-27T23:00:08.621Z",
+  "updated": "2026-11-27T23:56:45.168Z",
+  "checked": "2026-11-27T23:56:45.168Z",
   "featured": [
     {
       "source": "MBC 뉴스",
@@ -15,13 +15,13 @@
       "url": "https://imnews.imbc.com/replay/2026/nwtoday/article/6857792_37012.html"
     },
     {
-      "source": "시사프리즘",
-      "mark": "시",
-      "title": "바다로 나갔다 돌아온 ‘부캉이’…흑상어는 왜 북항으로 돌아오나",
-      "date": "2026. 10. 22.",
-      "published": "2026-10-22T07:00:00.000Z",
-      "snippet": "",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9YMVU2WTJoSXlmZDM0dDBFNXFpMTV1MnNEZkNHN210WmhWVUR0LUsySUw5dFRweHVnS2JKaUVGdHk3empDOVloZHRuUkJhVHhFa1BBaklKRkxEeWROSEZBNUJDekNTREZC?oc=5"
+      "source": "뉴시스",
+      "mark": "뉴",
+      "title": "닷새째 부산 수로 맴도는 상어 '부캉이'…이유는?",
+      "date": "2026. 9. 22.",
+      "published": "2026-09-22T07:00:00.000Z",
+      "snippet": "[서울=뉴시스]우은식 기자, 김선우 인턴기자 = 지난 18일 부산 북항 친수공원에서 상어가 발견된 가운데 앞으로도 남쪽 해역에서 서식하던 상어들의 북상이 이어질 수 있다는 전문가 분석이 나왔다.부산시 등에 따르면 북항 친수공원에 출몰한 상어는 무태상어로 추정된다. 무태상어는 태평양과 대서양, 인도양에 주로 서식하며 공격 위험성이 있는 어종으로 분류된다.김상..",
+      "url": "https://www.newsis.com/view/NISX20260922_0003800202"
     }
   ],
   "items": [
@@ -31,8 +31,8 @@
       "title": "부산 북항 친수공원 상어 '부캉이' 차단막 내달 1일 철거",
       "date": "2026. 11. 28.",
       "published": "2026-11-27T22:01:01.000Z",
-      "snippet": "",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9RZUlnenhhN3l6dUpETHdETFF2SUpNQktrWXJiMVBmRE5zelBRdldHQlhaNWlsWFo0dnRZcm1fc2Y4eEFYQkdrSDJxT3kyX1B0MzJibW5MdUI2VVnSAWBBVV95cUxNa1JvN0czWk5IZGhmNUZrSGwyVzZCVm5ISlp5QV9WcTZnN2lENTlCUE9oNlc4MHhIWWJydnhiczh5eWtqVWFqSmpDZGxqSExpZS1aUXZTRUJ1STRCV1pGOWE?oc=5"
+      "snippet": "(부산=연합뉴스) 이영재 기자 = 부산 북항 친수공원 인공 수로에 들어와 한 달 넘게 머무르다 떠난 상어 '부캉이'의 재진입을 막으려고 당국이 ...",
+      "url": "https://www.yna.co.kr/view/AKR20261127075100051"
     },
     {
       "source": "연합뉴스TV",
