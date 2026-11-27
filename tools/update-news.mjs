@@ -21,9 +21,11 @@ const OUT = process.env.NEWS_OUT || resolve(ROOT, "data/news.json");
 const QUERY = process.env.NEWS_QUERY || "부캉이";
 const STORY_ID = process.env.NEWS_STORY_ID || "CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2liX3QtV0VoRUMteGVJRHpCb1NpZ0FQAQ";
 const LOCALE = "hl=ko&gl=KR&ceid=KR:ko";
-const FEEDS = (process.env.NEWS_FEEDS ? process.env.NEWS_FEEDS.split(",") : [
-  `https://news.google.com/rss/search?q=${encodeURIComponent(QUERY)}&${LOCALE}`,
-]);
+const feedOf = q => `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&${LOCALE}`;
+const FEEDS = (process.env.NEWS_FEEDS ? process.env.NEWS_FEEDS.split(",") : [feedOf(QUERY)]);
+// 상단 고정 키워드 (메인 NEWS 맨 위 2건, '더 보기' 없음)
+const FEATURED_QUERY = process.env.NEWS_FEATURED_QUERY || "부캉이 김상화";
+const FEATURED_FEEDS = (process.env.NEWS_FEATURED_FEEDS ? process.env.NEWS_FEATURED_FEEDS.split(",") : [feedOf(FEATURED_QUERY)]);
 const LIMIT = 2;
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
@@ -142,33 +144,55 @@ async function enrich(item) {
   };
 }
 
-async function main() {
+async function fetchTop(feeds, exclude = new Set()) {
   let items = [], used = "";
-  for (const feed of FEEDS) {
+  for (const feed of feeds) {
     try {
       const xml = await (await get(feed)).text();
       items = parseRss(xml);
       if (items.length) { used = feed; break; }
     } catch (e) { console.warn("피드 실패:", feed, e.message); }
   }
-  if (!items.length) { console.error("뉴스 없음 — 기존 파일 유지"); process.exit(1); }
-
-  // 같은 언론사 중복 제거 후 상위 2건
+  // 상단 고정 기사와 같은 제목 제외, 같은 언론사 중복 제거 후 상위 2건
   const seen = new Set(), top = [];
-  for (const it of items) { if (seen.has(it.source)) continue; seen.add(it.source); top.push(it); if (top.length === LIMIT) break; }
-
+  for (const it of items) {
+    if (exclude.has(it.title) || seen.has(it.source)) continue;
+    seen.add(it.source); top.push(it);
+    if (top.length === LIMIT) break;
+  }
   const out = [];
   for (const it of top) { out.push(await enrich(it)); await sleep(400); }
+  return { out, used };
+}
 
-  const now = new Date().toISOString();
+async function main() {
   let prev = null;
   try { prev = JSON.parse(await readFile(OUT, "utf8")); } catch {}
-  const sameItems = prev && JSON.stringify(prev.items) === JSON.stringify(out);
-  const data = { query: QUERY, feed: used, updated: sameItems ? prev.updated : now, checked: now, items: out };
+
+  // 1) 상단 고정: '부캉이 김상화' — 못 받으면 이전 값 유지
+  const f = await fetchTop(FEATURED_FEEDS);
+  const featured = f.out.length ? f.out : (prev && prev.featured) || [];
+  if (!f.out.length) console.warn("상단 고정 기사 없음 — 이전 값 유지");
+
+  // 2) 일반: '부캉이' (상단 고정과 겹치는 기사 제외)
+  const g = await fetchTop(FEEDS, new Set(featured.map(n => n.title)));
+  if (!g.out.length && !f.out.length) { console.error("뉴스 없음 — 기존 파일 유지"); process.exit(1); }
+  const items = g.out.length ? g.out : (prev && prev.items) || [];
+
+  const now = new Date().toISOString();
+  const same = prev && JSON.stringify(prev.items) === JSON.stringify(items) && JSON.stringify(prev.featured || []) === JSON.stringify(featured);
+  const data = {
+    query: QUERY, feed: g.used || (prev && prev.feed) || "",
+    featuredQuery: FEATURED_QUERY,
+    updated: same ? prev.updated : now, checked: now,
+    featured, items
+  };
   await mkdir(dirname(OUT), { recursive: true });
   await writeFile(OUT, JSON.stringify(data, null, 2) + "\n");
-  if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `changed=${sameItems ? "false" : "true"}\n`, { flag: "a" });
-  console.log(sameItems ? "기사 변경 없음 (checked 시각만 갱신)" : "기사 변경됨");
-  console.log(`저장: ${OUT}`); out.forEach(n => console.log(` - [${n.source}] ${n.title}`));
+  if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `changed=${same ? "false" : "true"}\n`, { flag: "a" });
+  console.log(same ? "기사 변경 없음 (checked 시각만 갱신)" : "기사 변경됨");
+  console.log(`저장: ${OUT}`);
+  featured.forEach(n => console.log(` * [${n.source}] ${n.title}`));
+  items.forEach(n => console.log(` - [${n.source}] ${n.title}`));
 }
 main().catch(e => { console.error(e); process.exit(1); });
