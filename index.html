@@ -180,6 +180,7 @@ a{color:inherit; text-decoration:none}
   font-size:max(calc(var(--u) * 1.25), 13px); font-weight:300; line-height:1.65; letter-spacing:-.02em;
   color:rgba(255,255,255,.92); text-shadow:0 1px 3px rgba(0,20,15,.45), 0 2px 16px rgba(0,20,15,.45);
 }
+.hero-lede{word-break:keep-all; overflow-wrap:break-word; text-wrap:pretty}   /* 띄어쓰기 단위로만 줄바꿈 */
 .hero-lede span{display:block}
 .hero-lede strong{font-weight:700; color:var(--white)}
 .btn--submit{
@@ -197,7 +198,7 @@ a{color:inherit; text-decoration:none}
   display:grid; place-items:center; text-align:center;
   padding:calc(var(--u) * 3) calc(var(--u) * 2);
 }
-.stats p{margin:0; font-family:var(--serif); font-size:max(calc(var(--u) * 1.75), 13px); font-weight:300; line-height:1.55; letter-spacing:-.03em; color:var(--ink)}
+.stats p{margin:0; font-family:var(--font); font-size:max(calc(var(--u) * 1.75), 13px); font-weight:300; line-height:1.55; letter-spacing:-.03em; color:var(--ink)}
 .count{
   display:inline-flex; align-items:baseline; justify-content:center; gap:.18em;
   margin:0 .15em; font-weight:500; color:#4c8395;
@@ -414,7 +415,7 @@ a{color:inherit; text-decoration:none}
       <p class="hero-lede">
         <span><strong>35일</strong>간 부산 북항친수공원 인공수로에 머문 흑상어, ‘<strong>부캉이</strong>’.</span>
         <span>그 시간 동안의 영양과 건강 상태는 아직까지도 명확히 알려지지 않았습니다.</span>
-        <span>이에 모두의 기록을 모아 분석하여 정량적 진단 기준을 모색하고,</span>
+        <span>이에 <strong>새리</strong>는 모두의 기록을 모아 분석하여 정량적 진단 기준을 모색하고,</span>
         <span>시민의 관찰과 과학이 만나 <strong>공존</strong>의 길을 찾는 <strong>시민 과학</strong>의 가능성을 탐색하고자 합니다.</span>
       </p>
       <!-- 2-1 → 탭 1 (미개발) -->
