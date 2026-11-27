@@ -573,11 +573,12 @@ const STATS_URL = "https://csaeri-submit.ryuyj39.workers.dev/stats";
   } catch (_) { /* 실패 시 (–) 유지 */ }
 })();
 
-function renderNews(items, updated){
+function renderNews(items, updated, featured = []){
   const list = document.getElementById("news-list");
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "#";
-  list.innerHTML = items.slice(0, 2).map(n => `
+  // 위: '부캉이 김상화' 2건 / 아래: '부캉이' 2건 ('더 보기'는 아래 목록용)
+  list.innerHTML = [...featured.slice(0, 2), ...items.slice(0, 2)].map(n => `
     <li class="news-item">
       <a href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener">
         <div class="news-src"><i aria-hidden="true">${esc(n.mark || (n.source || "N").charAt(0))}</i>${esc(n.source)}</div>
@@ -598,9 +599,11 @@ async function loadNews(){
     const res = await fetch(`${NEWS_URL}?v=${Math.floor(Date.now() / 300000)}`, { cache: "no-store" });
     if (!res.ok) return;
     const data = await res.json();
-    const items = (Array.isArray(data.items) ? data.items : [])
-      .filter(n => n && n.title && n.source && n.source !== "news.google.com" && !/사용할 수 없는 피드/.test(n.title));
-    if (items.length) renderNews(items, data.checked || data.updated);
+    const ok = n => n && n.title && n.source && n.source !== "news.google.com" && !/사용할 수 없는 피드/.test(n.title);
+    const featured = (Array.isArray(data.featured) ? data.featured : []).filter(ok);
+    const titles = new Set(featured.map(n => n.title));
+    const items = (Array.isArray(data.items) ? data.items : []).filter(n => ok(n) && !titles.has(n.title));
+    if (items.length || featured.length) renderNews(items.length ? items : NEWS, data.checked || data.updated, featured);
   } catch (_) { /* 확인본 유지 */ }
 }
 loadNews();
