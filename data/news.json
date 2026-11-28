@@ -2,8 +2,8 @@
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
   "featuredQuery": "부캉이 김상화",
-  "updated": "2026-11-28T01:18:13.433Z",
-  "checked": "2026-11-28T01:18:13.433Z",
+  "updated": "2026-11-28T02:56:56.686Z",
+  "checked": "2026-11-28T02:56:56.686Z",
   "featured": [
     {
       "source": "MBC 뉴스",
@@ -15,13 +15,13 @@
       "url": "https://imnews.imbc.com/replay/2026/nwtoday/article/6857792_37012.html"
     },
     {
-      "source": "뉴시스",
-      "mark": "뉴",
-      "title": "닷새째 부산 수로 맴도는 상어 '부캉이'…이유는?",
-      "date": "2026. 9. 22.",
-      "published": "2026-09-22T07:00:00.000Z",
-      "snippet": "[서울=뉴시스]우은식 기자, 김선우 인턴기자 = 지난 18일 부산 북항 친수공원에서 상어가 발견된 가운데 앞으로도 남쪽 해역에서 서식하던 상어들의 북상이 이어질 수 있다는 전문가 분석이 나왔다.부산시 등에 따르면 북항 친수공원에 출몰한 상어는 무태상어로 추정된다. 무태상어는 태평양과 대서양, 인도양에 주로 서식하며 공격 위험성이 있는 어종으로 분류된다.김상..",
-      "url": "https://www.newsis.com/view/NISX20260922_0003800202"
+      "source": "시사프리즘",
+      "mark": "시",
+      "title": "바다로 나갔다 돌아온 ‘부캉이’…흑상어는 왜 북항으로 돌아오나",
+      "date": "2026. 10. 22.",
+      "published": "2026-10-22T07:00:00.000Z",
+      "snippet": "",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9YMVU2WTJoSXlmZDM0dDBFNXFpMTV1MnNEZkNHN210WmhWVUR0LUsySUw5dFRweHVnS2JKaUVGdHk3empDOVloZHRuUkJhVHhFa1BBaklKRkxEeWROSEZBNUJDekNTREZC?oc=5"
     }
   ],
   "items": [
@@ -37,11 +37,11 @@
     {
       "source": "경향신문",
       "mark": "경",
-      "title": "‘부캉이’ 인기에 명예홍보대사 위촉했던 부산시···“해수욕장 출몰은 안 돼” 상어 퇴치장비 도입 추진",
-      "date": "2026. 11. 17.",
-      "published": "2026-11-17T08:00:00.000Z",
-      "snippet": "부산시가 해수욕장에 상어 퇴치 장비 도입을 추진한다. 개장 기간 동안 부산 지역 해수욕장에 상어가 출몰한 사례는 아직 보고되지 않았다. 하지만 부캉이가 북항 친수공원에 나타난 것처럼 해수욕장에 상어가 나타날 수 있는 가능성을 배제할 수 없다는 게 부산시의 입장이다.",
-      "url": "https://www.khan.co.kr/article/202611171123001"
+      "title": "‘부캉이’ 재진입 차단시설 12월1일 철거…“따뜻한 남쪽 바다서 잘 지내니”",
+      "date": "2026. 11. 28.",
+      "published": "2026-11-28T01:06:00.000Z",
+      "snippet": "부산 북항 친수공원에서 한 달 넘게 머무르다 떠난 흑상어",
+      "url": "https://www.khan.co.kr/article/202611281006001"
     }
   ]
 }
