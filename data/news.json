@@ -2,8 +2,8 @@
   "query": "부캉이",
   "feed": "https://news.google.com/rss/search?q=%EB%B6%80%EC%BA%89%EC%9D%B4&hl=ko&gl=KR&ceid=KR:ko",
   "featuredQuery": "부캉이 김상화",
-  "updated": "2026-11-28T11:53:11.892Z",
-  "checked": "2026-11-28T11:53:11.892Z",
+  "updated": "2026-11-28T14:08:28.891Z",
+  "checked": "2026-11-28T14:08:28.891Z",
   "featured": [
     {
       "source": "MBC 뉴스",
@@ -15,13 +15,13 @@
       "url": "https://imnews.imbc.com/replay/2026/nwtoday/article/6857792_37012.html"
     },
     {
-      "source": "시사프리즘",
-      "mark": "시",
-      "title": "바다로 나갔다 돌아온 ‘부캉이’…흑상어는 왜 북항으로 돌아오나",
-      "date": "2026. 10. 22.",
-      "published": "2026-10-22T07:00:00.000Z",
-      "snippet": "",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9YMVU2WTJoSXlmZDM0dDBFNXFpMTV1MnNEZkNHN210WmhWVUR0LUsySUw5dFRweHVnS2JKaUVGdHk3empDOVloZHRuUkJhVHhFa1BBaklKRkxEeWROSEZBNUJDekNTREZC?oc=5"
+      "source": "조선일보",
+      "mark": "조",
+      "title": "그물망 뚫고 다시 돌아온 부캉이… 수로가 집처럼 편해졌을까",
+      "date": "2026. 10. 23.",
+      "published": "2026-10-23T07:00:00.000Z",
+      "snippet": "부산 북항 수로에 장기 체류 중인 멸종 위기종 흑상어 부캉이를 바다로 방생하려는 노력이 이어지고 있습니다. 여러 차례의 시도에도 부캉이가 수로로 되돌아오면서, 전문가들은 수온과 환경 적응 등을 원인으로 분석하고 있습니다. 건강 악화가 우려되는 가운데 수온 하락에 따른 자연스러운 이동을 기대하는 상황입니다.",
+      "url": "https://www.chosun.com/kid/kid_literacy/2026/10/22/QZ6DK6YHBJAC5ASBM3G76A2ADY/"
     }
   ],
   "items": [
